@@ -5,6 +5,7 @@ module.exports = [
     surname: "Bsaibes",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ module.exports = [
     surname: "Nathasia",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ module.exports = [
     surname: "Doak",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ module.exports = [
     surname: "Unknown",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ module.exports = [
     surname: "Patel",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
   {
     id: 6,
@@ -40,5 +45,6 @@ module.exports = [
     surname: "van D",
     email: "random@gmail.com",
     password: "ilovelouis",
+    avatar_url: "https://picsum.photos/200/200",
   },
 ];

@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("first_name").notNullable();
     table.string("surname").notNullable();
+    table.string("avatar_url").notNullable(); // PICS
     table.string("email").notNullable();
     table.string("password").notNullable();
     table.boolean("active").defaultTo(false);

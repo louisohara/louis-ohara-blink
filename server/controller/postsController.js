@@ -73,7 +73,22 @@ const getPostComments = async (req, res) => {
         message: `Comments belonging to a post with ID ${req.params.id} not found`,
       });
     }
-    res.status(200).json(userCommentsOnPostData);
+    const userCommentsOnPostDataReduced = userCommentsOnPostData.map(
+      (comment) => {
+        const condensed = {
+          id: comment.id,
+          post_id: comment.post_id,
+          author_id: comment.author_id,
+          avatar_url: comment.avatar_url,
+          comment: comment.comment,
+          first_name: comment.first_name,
+          surname: comment.surname,
+          created_at: comment.created_at,
+        };
+        return condensed;
+      }
+    );
+    res.status(200).json(userCommentsOnPostDataReduced);
   } catch (error) {
     res.status(500).json({
       message: `Error retrieving comments belonging to that post: ${error}`,
