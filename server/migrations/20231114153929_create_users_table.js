@@ -11,6 +11,7 @@ exports.up = function (knex) {
     table.string("email").notNullable();
     table.string("password").notNullable();
     table.boolean("active").defaultTo(false);
+    table.timestamp("expirationTime").nullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
       .timestamp("updated_at")

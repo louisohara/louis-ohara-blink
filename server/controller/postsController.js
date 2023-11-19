@@ -23,9 +23,19 @@ const getPost = async (req, res) => {
   }
 };
 const addPost = async (req, res) => {
-  const { author_id, duration, content } = req.body;
+  const { author_id, duration, content, expirationTime } = req.body;
+  // const expirationTime = new Date(Date.now() + duration);
+  // const formattedExpirationTime = expirationTime
+  //   .toISOString()
+  //   .slice(0, 19)
+  //   .replace("T", " ");
   try {
-    const newItem = { author_id, duration, content };
+    const newItem = {
+      author_id,
+      duration,
+      content,
+      expirationTime,
+    };
 
     const [id] = await knex("posts").insert(newItem).returning("id");
     const insertedItem = await knex("posts").where({ id }).first();

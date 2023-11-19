@@ -45,6 +45,21 @@ const addUser = async (req, res) => {
     res.status(500).json({ message: `Error adding User: ${error}` });
   }
 };
+const editUser = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const result = await knex("users").where({ id }).update(updates);
+    if (result === 0) {
+      return res.status(404).json({ message: `User with ID ${id} not found` });
+    }
+    const editSingleUser = await knex("users").where({ id }).first();
+    res.status(200).json(editSingleUser);
+  } catch (error) {
+    res.status(500).json({ message: `Error editing user: ${error}` });
+  }
+};
 const getUserPosts = async (req, res) => {
   const { id } = req.params;
 
@@ -65,6 +80,7 @@ const getUserPosts = async (req, res) => {
         author_id: post.author_id,
         avatar_url: post.avatar_url,
         duration: post.duration,
+        expirationTime: post.expirationTime,
         content: post.content,
         created_at: post.created_at,
       };
@@ -113,7 +129,7 @@ module.exports = {
   getAllUsers,
   getUser,
   addUser,
-  //   editUser,
+  editUser,
   getUserPosts,
   getUserFriends,
 };

@@ -9,6 +9,7 @@ exports.up = function (knex) {
     table.integer("duration").notNullable();
     table.string("content").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.timestamp("expirationTime").nullable();
     table
       .timestamp("updated_at")
       .defaultTo(knex.raw("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"));
