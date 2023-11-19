@@ -1,0 +1,20 @@
+@use "../../styles/partials/variables" as *;
+.display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: $tertiary-colour;
+}
+
+.profile {
+  &__empty {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px dashed var(--color-border, #e5e5e5);
+    background: transparent;
+  }
+}
