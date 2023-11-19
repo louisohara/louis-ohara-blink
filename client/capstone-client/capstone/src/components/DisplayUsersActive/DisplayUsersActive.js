@@ -1,15 +1,20 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./DisplayUsersPosts.scss";
+import "./DisplayUsersActive.scss";
 
-function DisplayUsersPosts({ usersArray }) {
-  const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
+//TO DO - WORK OUT HOW TO DISPLAY CONSTANT NUMBER OF EMPTY PROFILES REGARDLESS OF PROPS
+
+function DisplayUsersActive({ usersArray }) {
+  // const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
+
+  const sortedUsers = usersArray
+    .slice()
+    .sort((a, b) => b.expirationTime - a.expirationTime);
 
   return (
     <section className="display">
       {sortedUsers.slice(0, 9).map((user) => {
         if (user.active === 1) {
-          console.log(user.active === 1);
           return (
             <Link
               className="display__link"
@@ -43,4 +48,4 @@ function DisplayUsersPosts({ usersArray }) {
   );
 }
 
-export default DisplayUsersPosts;
+export default DisplayUsersActive;

@@ -13,14 +13,31 @@ function CreatePostForm({ userId }) {
   //   console.log(userId);
   // const [isError, setIsError] = useState(false);
   const [fields, setFields] = useState({
-    duration: null,
+    duration: "",
     content: "",
   });
+  const [post, setPost] = useState(null);
 
   const [errors, setErrors] = useState("");
 
   const handleChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
+  };
+
+  const deactivate = async ({ postId }) => {
+    try {
+      const user = await axios.put(
+        `http://localhost:8080/api/users/${userId}`,
+        { active: false }
+      );
+      //   const response = await axios.get(`http://localhost:8080/api/users/${userId}/posts`)
+      //   setPost(response.data);
+      //   const deletePost = await axios.delete(
+      //     `http://localhost:8080/api/posts/${postId}`
+      //   );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -32,21 +49,29 @@ function CreatePostForm({ userId }) {
     // } else {
     //   setIsError(false);
     try {
+      const durationMilliseconds = parseInt(fields.duration, 10) * 60 * 1000;
+      const expirationTime = new Date(Date.now() + durationMilliseconds);
+      const formattedExpirationTime = expirationTime
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
       const userEdit = await axios.put(
         `http://localhost:8080/api/users/${userId}`,
-        { active: true }
+        { active: true, expirationTime: formattedExpirationTime }
       );
 
       const response = await axios.post("http://localhost:8080/api/posts/", {
         ...fields,
         author_id: userId,
+        duration: durationMilliseconds,
+        expirationTime: formattedExpirationTime,
       });
 
       if (response.status === 201) {
         //   setUploaded(true);
-        //   setTimeout(() => {
-        //     navigate("/");
-        //   }, 2000);
+        setTimeout(() => {
+          deactivate(response.data.id);
+        }, durationMilliseconds);
         console.log("success!");
       } else {
         console.error("Post creation failed.");
@@ -63,14 +88,21 @@ function CreatePostForm({ userId }) {
         <div className="form__container">
           <label htmlFor="duration" className="form__label">
             How long are you free for?
-            <input
-              type="text"
-              className="form__input"
-              placeholder="Add a duration to your video"
+            <select
+              className="form__input" // Apply appropriate styling
               name="duration"
               id="duration"
+              value={fields.duration}
               onChange={handleChange}
-            />
+            >
+              <option value="">Select duration</option>
+              <option value="1">1 Minutes</option>
+              <option value="2">2 Minutes</option>
+              <option value="3">3 Minutes</option>
+              <option value="5">5 Minutes</option>
+
+              {/* Add other duration options as needed */}
+            </select>
           </label>
           <label htmlFor="content" className="form__label">
             What do you want to do?
