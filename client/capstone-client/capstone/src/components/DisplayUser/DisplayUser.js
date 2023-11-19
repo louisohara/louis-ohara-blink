@@ -8,7 +8,7 @@ function DisplayUser({ user }) {
           className="profile__image"
         />
       </div>
-      <p className="profile__name">{user.first_name}</p>
+      <p className="profile__name">{`${user.first_name} ${user.surname}`}</p>
     </article>
   );
 }

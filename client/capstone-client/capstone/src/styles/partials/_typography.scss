@@ -2,19 +2,19 @@
 
 @font-face {
   font-family: "Titillium Web";
-  src: url("../assets/fonts/TitilliumWeb-Regular.ttf") format("truetype");
+  src: url("../../assets/fonts/TitilliumWeb-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Titillium Web";
-  src: url("../assets/fonts/TitilliumWeb-Bold.ttf") format("truetype");
+  src: url("../../assets/fonts/TitilliumWeb-Bold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 body {
   font-family: "Titillium Web", monospace, sans-serif;
-  color: $primary-black;
+  color: $primary-colour;
 }

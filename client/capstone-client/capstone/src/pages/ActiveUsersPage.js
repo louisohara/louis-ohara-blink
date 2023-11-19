@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import DisplayUsers from "../components/DisplayUsers/DisplayUsers";
+
 import { Link } from "react-router-dom";
+import DisplayUsersPosts from "../components/DisplayUsersPosts/DisplayUsersPosts";
 
 function ActiveUsersPage() {
   const [users, setUsers] = useState(null);
@@ -34,7 +35,7 @@ function ActiveUsersPage() {
   return (
     <section className="active">
       This is the active users page
-      <DisplayUsers usersArray={users} />
+      <DisplayUsersPosts usersArray={users} />
     </section>
   );
 }

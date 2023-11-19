@@ -3,6 +3,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import DisplayUser from "../components/DisplayUser/DisplayUser";
+import CreatePostForm from "../components/CreatePostForm/CreatePostForm";
+
+// THIS PAGE NEEDS TO BE THE ID OF THE CURRENT USER
+// SHOULD BE PASSED THE ID OF THE USER FROM APP.JS VIA PROPS
+// LOGIN/AUTH WILL FEED ID INTO THIS PAGE.
+// this page is where the user can view their profile and create a post.
 
 function UserPage() {
   const { id } = useParams();
@@ -23,6 +29,7 @@ function UserPage() {
     <section className="user">
       This is the user page
       <DisplayUser user={user} />
+      <CreatePostForm userId={id} />
     </section>
   );
 }

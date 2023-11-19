@@ -6,6 +6,7 @@ import UserPostsPage from "./pages/UserPostsPage";
 import UserFriendsPage from "./pages/UserFriendsPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import CreatePostPage from "./pages/CreatePostPage";
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
           <div className="test">hey</div>
           <Routes>
             <Route path="/" element={<ActiveUsersPage />} />
-            <Route path="/:id" element={<UserPage />} />
-            <Route path="/:id/posts" element={<UserPostsPage />} />
-            <Route path="/:id/friends" element={<UserFriendsPage />} />
+            <Route path="/post" element={<CreatePostPage />} />
+            <Route path="/users/:id" element={<UserPage />} />
+            <Route path="/users/:id/posts" element={<UserPostsPage />} />
+            <Route path="/users/:id/friends" element={<UserFriendsPage />} />
           </Routes>
         </main>
         <Footer />
