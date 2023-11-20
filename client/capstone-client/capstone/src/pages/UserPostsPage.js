@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import DisplayUsersPosts from "../components/DisplayUsersActive/DisplayUsersActive";
 import DisplayPostComments from "../components/DisplayPostComments/DisplayPostComments";
+import AddComment from "../components/AddComment/AddComment";
 
 //THIS IS THE PAGE THAT IS LINKED TO ONCE THE ACTIVE PROFILE IS CLICKED.
 //IT SHOULD RECEIVE THE ID OF THE SELECTED PROFILE AS A PROP.
@@ -21,15 +22,15 @@ function UserPostsPage() {
       const response = await axios.get(
         `http://localhost:8080/api/users/${id}/posts`
       );
-      const currentTime = new Date();
-      // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
-      const filteredPosts = response.data.filter((post) => {
-        const expirationTime = new Date(post.expirationTime);
-        return expirationTime > currentTime;
-      });
+      // const currentTime = new Date();
+      // // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
+      // const filteredPosts = response.data.filter((post) => {
+      //   const expirationTime = new Date(post.expirationTime);
+      //   return expirationTime > currentTime;
+      // });
       //DISPLAYS ONLY POSTS THAT HAVE YET TO EXPIRE
-      setUserPost(filteredPosts[0]);
-
+      // setUserPost(filteredPosts[0]);
+      setUserPost(response.data[0]);
       // console.log(response.data);
       console.log(userPost);
     };
@@ -59,6 +60,7 @@ function UserPostsPage() {
         </div>
       </article>
       <DisplayPostComments postID={userPost.id} />
+      <AddComment />
     </section>
   );
 }
