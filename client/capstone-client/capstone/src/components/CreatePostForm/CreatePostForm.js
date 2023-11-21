@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Button from "../Button/Button";
+import "../Modal/Modal.scss";
+import close from "../../assets/Icons/close-24px.svg";
 
 //TO DO -
 //FORM VALIDATION INCLUDING ERROR MESSAGE FIELDS
@@ -9,7 +11,7 @@ import Button from "../Button/Button";
 //DROP DOWN MENU TO SELECT DURATION VALUE
 //FORM SUBMISSION NAVIGATION TO WHO'S AVAILABLE PAGE
 
-function CreatePostForm({ userId }) {
+function CreatePostForm({ userId, handleClose }) {
   //   console.log(userId);
   // const [isError, setIsError] = useState(false);
   const [fields, setFields] = useState({
@@ -69,6 +71,7 @@ function CreatePostForm({ userId }) {
 
       if (response.status === 201) {
         //   setUploaded(true);
+        handleClose();
         setTimeout(() => {
           deactivate(response.data.id);
         }, durationMilliseconds);
@@ -83,58 +86,61 @@ function CreatePostForm({ userId }) {
   };
 
   return (
-    <div className="form">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form__container">
-          <label htmlFor="duration" className="form__label">
-            How long are you free for?
-            <select
-              className="form__input" // Apply appropriate styling
-              name="duration"
-              id="duration"
-              value={fields.duration}
-              onChange={handleChange}
-            >
-              <option value="">Select duration</option>
-              <option value="1">1 Minutes</option>
-              <option value="2">2 Minutes</option>
-              <option value="3">3 Minutes</option>
-              <option value="5">5 Minutes</option>
+    <div className="modal">
+      <Button image={close} onClick={handleClose} />
+      <div className="form">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="form__container">
+            <label htmlFor="duration" className="form__label">
+              How long are you free for?
+              <select
+                className="form__input" // Apply appropriate styling
+                name="duration"
+                id="duration"
+                value={fields.duration}
+                onChange={handleChange}
+              >
+                <option value="">Select duration</option>
+                <option value="1">1 Minutes</option>
+                <option value="2">2 Minutes</option>
+                <option value="3">3 Minutes</option>
+                <option value="5">5 Minutes</option>
 
-              {/* Add other duration options as needed */}
-            </select>
-          </label>
-          <label htmlFor="content" className="form__label">
-            What do you want to do?
-            <textarea
-              name="content"
-              id="content"
-              cols="30"
-              rows="10"
-              className="form__input  form__input--textarea"
-              placeholder="Add a content to your video"
-              onChange={handleChange}
-            ></textarea>
-          </label>
-          {/* {isError && (
+                {/* Add other duration options as needed */}
+              </select>
+            </label>
+            <label htmlFor="content" className="form__label">
+              What do you want to do?
+              <textarea
+                name="content"
+                id="content"
+                cols="30"
+                rows="10"
+                className="form__input  form__input--textarea"
+                placeholder="Add a content to your video"
+                onChange={handleChange}
+              ></textarea>
+            </label>
+            {/* {isError && (
       <p className="form__response">Please fill all fields</p>
     )} */}
-          {/* {uploaded && (
+            {/* {uploaded && (
       <p className="form__response">
         Upload successful - redirecting to homepage
       </p>
     )} */}
-        </div>
-        <div className="form__button-container">
-          <button className="form__button">CANCEL</button>
-          <Button
-            image="none"
-            text="Post"
-            className="form__button--other"
-            type="submit"
-          />
-        </div>
-      </form>
+          </div>
+          <div className="form__button-container">
+            <button className="form__button">CANCEL</button>
+            <Button
+              image="none"
+              text="Post"
+              className="form__button--other"
+              type="submit"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

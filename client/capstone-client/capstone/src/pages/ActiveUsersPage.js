@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import DisplayUsersActive from "../components/DisplayUsersActive/DisplayUsersActive";
 
-function ActiveUsersPage() {
+function ActiveUsersPage({ currentUser }) {
   const [users, setUsers] = useState(null);
   const [active, setActive] = useState(null);
   const baseURL = "http://localhost:8080/api/users";
@@ -29,6 +29,7 @@ function ActiveUsersPage() {
     getUsers();
   }, []);
 
+  //THIS IS THE INTERVAL TIMER
   // useEffect(() => {
   //   if (!users || !Array.isArray(users)) {
   //     return; // Ensure users data is available and valid
@@ -70,7 +71,11 @@ function ActiveUsersPage() {
   return (
     <section className="active">
       This is the active users page
-      <DisplayUsersActive usersArray={users} activeArray={active} />
+      <DisplayUsersActive
+        usersArray={users}
+        activeArray={active}
+        currentUser={currentUser}
+      />
     </section>
   );
 }

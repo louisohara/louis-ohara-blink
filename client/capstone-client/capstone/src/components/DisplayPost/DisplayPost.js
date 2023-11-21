@@ -2,9 +2,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import DisplayUsersPosts from "../components/DisplayUsersActive/DisplayUsersActive";
-import DisplayPostComments from "../components/DisplayPostComments/DisplayPostComments";
-import AddComment from "../components/AddComment/AddComment";
+import DisplayPostComments from "../DisplayPostComments/DisplayPostComments";
+import Button from "../Button/Button";
+import "../Modal/Modal.scss";
+import close from "../../assets/Icons/close-24px.svg";
 
 //THIS IS THE PAGE THAT IS LINKED TO ONCE THE ACTIVE PROFILE IS CLICKED.
 //IT SHOULD RECEIVE THE ID OF THE SELECTED PROFILE AS A PROP.
@@ -15,14 +16,14 @@ import AddComment from "../components/AddComment/AddComment";
 //TO DO - styling of post
 // - timestamp conversion
 
-function UserPostsPage({ currentUser }) {
-  const { id } = useParams();
+function DisplayPost({ currentUser, handleClose, user }) {
+  //   const { id } = useParams();
   const [userPost, setUserPost] = useState(null);
 
   useEffect(() => {
     const getUserPost = async () => {
       const response = await axios.get(
-        `http://localhost:8080/api/users/${id}/posts`
+        `http://localhost:8080/api/users/${user.id}/posts`
       );
       const currentTime = new Date();
       // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
@@ -37,14 +38,15 @@ function UserPostsPage({ currentUser }) {
       console.log(userPost);
     };
     getUserPost();
-  }, [id]);
+  }, [user.id]);
 
   if (!userPost) {
     return <p>loading...</p>;
   }
 
   return (
-    <section className="user">
+    <section className="user modal">
+      <Button image={close} onClick={handleClose} />
       <article className="post">
         <div className="post__icon-container">
           <img
@@ -66,4 +68,4 @@ function UserPostsPage({ currentUser }) {
   );
 }
 
-export default UserPostsPage;
+export default DisplayPost;

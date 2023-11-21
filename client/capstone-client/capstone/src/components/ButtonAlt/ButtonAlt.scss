@@ -1,0 +1,44 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/typography" as *;
+
+.button {
+  width: 2rem;
+  &__icon {
+    // width: ;
+    height: auto;
+    margin-right: 1rem;
+    // filter: brightness(0) invert(1);
+    margin: unset;
+  }
+  &__container {
+    cursor: pointer;
+    padding: 0.5rem;
+    // position: absolute;
+    // right: 1rem;
+    background-color: $primary-colour;
+    // color: $white-1;
+    border-radius: 50%;
+    @include tablet {
+      border-radius: 1.5625rem;
+      padding: 0.5rem 1rem;
+    }
+    &:hover {
+      background-color: $secondary-colour;
+    }
+
+    text-decoration: unset;
+    color: $white-1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__text {
+    display: none;
+    @include tablet {
+      display: inline;
+      font-size: 1.25rem;
+    }
+  }
+}

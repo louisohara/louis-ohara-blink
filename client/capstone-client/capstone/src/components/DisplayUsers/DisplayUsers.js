@@ -4,13 +4,13 @@ import "./DisplayUsers.scss";
 //DISPLAYS FRIENDS
 
 function DisplayUsers({ usersArray }) {
-  const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
+  // const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
 
   return (
     <section className="display">
-      {sortedUsers.slice(0).map((user) => {
+      {usersArray.slice(0).map((user) => {
         // if (user.active === 1) {
-        console.log(user.active === 1);
+        // console.log(user.active === 1);
         return (
           <Link
             className="display__link"
@@ -29,17 +29,20 @@ function DisplayUsers({ usersArray }) {
             </article>
           </Link>
         );
-        // } else if (user.active === 0) {
-        return (
-          <article className="profile__empty" key={user.id}>
-            <div className="profile__wrapper">
-              <div className="profile__inner"></div>
-            </div>
-          </article>
-        );
-        // }
-        // return null;
       })}
+      {usersArray === [] ? (
+        <article className="profile__empty">
+          <div className="profile__wrapper">
+            <div className="profile__inner"></div>
+          </div>
+        </article>
+      ) : (
+        ""
+      )}
+      {/* // ); */}
+      {/* // } */}
+      {/* // return null; */}
+      {/* // })} */}
     </section>
   );
 }

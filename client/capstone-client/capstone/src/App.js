@@ -1,14 +1,41 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 import ActiveUsersPage from "./pages/ActiveUsersPage";
 import UserPage from "./pages/UserPage";
-import UserPostsPage from "./pages/UserPostsPage";
+import UserPostsPage from "./pages/UserPostsPage.js";
 import UserFriendsPage from "./pages/UserFriendsPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import CreatePostPage from "./pages/CreatePostPage";
+import UserSignUpPage from "./pages/UserSignUpPage";
+
+//GET THE ID OF THE CURRENT USER AND PASS AS PROPS TO:
+//USER PAGE
+//USER FRIENDS PAGE
+//CREATE POST PAGE
+//USERPOSTSPAGE - IN ORDER TO ADD COMMENTS
 
 function App() {
+  const [users, setUsers] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  //GET THE MOST RECENT USER ADDED - the user profile most recently added should be the current user
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const response = await axios.get(`http://localhost:8080/api/users/`);
+      setUsers(response.data);
+      setCurrentUser(response.data[response.data.length - 1]);
+    };
+    getCurrentUser();
+  }, []);
+
+  if (!currentUser || !users) {
+    return <p>loading...</p>;
+  }
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -16,11 +43,23 @@ function App() {
         <main className="main">
           <div className="test">hey</div>
           <Routes>
-            <Route path="/" element={<ActiveUsersPage />} />
+            <Route path="/signup" element={<UserSignUpPage />} />
+            <Route
+              path="/"
+              element={<ActiveUsersPage currentUser={currentUser} />}
+            />
             <Route path="/post" element={<CreatePostPage />} />
             <Route path="/users/:id" element={<UserPage />} />
-            <Route path="/users/:id/posts" element={<UserPostsPage />} />
-            <Route path="/users/:id/friends" element={<UserFriendsPage />} />
+            <Route
+              path="/users/:id/posts"
+              element={<UserPostsPage currentUser={currentUser} />}
+            />
+            <Route
+              path="/users/friends"
+              element={
+                <UserFriendsPage currentUser={currentUser} users={users} />
+              }
+            />
           </Routes>
         </main>
         <Footer />
