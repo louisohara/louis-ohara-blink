@@ -41,35 +41,40 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Header currentUser={currentUser} />
+        <Footer currentUser={currentUser} />
         <main className="main">
-          <div className="test">hey</div>
-          <Routes>
-            <Route
-              path="/signup"
-              element={<UserSignUpPage setCurrentUser={setCurrentUser} />}
-            />
-            <Route
-              path="/"
-              element={<ActiveUsersPage currentUser={currentUser} />}
-            />
-            <Route
-              path="/login"
-              element={<LoginPage currentUser={currentUser} />}
-            />
-            <Route path="/users/:id" element={<UserPage />} />
-            <Route
-              path="/users/:id/posts"
-              element={<UserPostsPage currentUser={currentUser} />}
-            />
-            <Route
-              path="/users/friends"
-              element={
-                <UserFriendsPage currentUser={currentUser} users={users} />
-              }
-            />
-          </Routes>
+          <div className="main__div"></div>
+          <div className="main__inner">
+            <Routes>
+              <Route
+                path="/signup"
+                element={<UserSignUpPage setCurrentUser={setCurrentUser} />}
+              />
+              <Route
+                path="/"
+                element={<ActiveUsersPage currentUser={currentUser} />}
+              />
+              <Route
+                path="/login"
+                element={<LoginPage currentUser={currentUser} />}
+              />
+              <Route
+                path="/users/:id"
+                element={<UserPage currentUser={currentUser} />}
+              />
+              <Route
+                path="/users/:id/posts"
+                element={<UserPostsPage currentUser={currentUser} />}
+              />
+              <Route
+                path="/users/friends"
+                element={
+                  <UserFriendsPage currentUser={currentUser} users={users} />
+                }
+              />
+            </Routes>
+          </div>
         </main>
-        <Footer />
       </BrowserRouter>
     </div>
   );

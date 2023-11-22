@@ -3,13 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  background-color: $tertiary-colour;
+  background: transparent;
 }
 
 .profile {
   &__empty {
     height: 200px;
     width: 200px;
+
     display: flex;
     justify-content: center;
     align-items: center;

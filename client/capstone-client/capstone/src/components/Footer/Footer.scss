@@ -1,0 +1,72 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+@use "../../styles/partials/variables" as *;
+
+//add a z-index
+.footer {
+  margin: 0;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  @include tablet {
+    width: $navbar-width;
+  }
+  &__navbar {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    background-color: $alt-tertiary-colour;
+    @include tablet {
+      position: absolute;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: $navbar-width;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+  &__container {
+    margin: 0;
+
+    display: flex;
+    justify-content: space-around;
+    @include tablet {
+      flex-direction: column;
+      margin-top: calc((100% - $header-height));
+    }
+  }
+  &__icon {
+    width: $icon;
+    height: auto;
+    // filter: invert(100%);
+  }
+  &__image-container {
+    margin: 0;
+    padding: 1rem;
+  }
+  &__link {
+    display: inline;
+    @include tablet {
+      margin: 0;
+    }
+    // WORK OUT HOW TO INVERT THE IMAGE OF THE ACTIVE LINK
+    // &img.active {
+    //   filter: invert(100%);
+    // }
+  }
+  &__link.active {
+    border-top: 2px solid $secondary-colour;
+    background-color: $alt-secondary-colour;
+
+    @include tablet {
+      border-top: none;
+      border-left: 4px solid $secondary-colour;
+    }
+    &__link:hover {
+      background-color: $primary-colour;
+    }
+  }
+}

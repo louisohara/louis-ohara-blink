@@ -3,7 +3,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  background-color: $tertiary-colour;
+  background: transparent;
+  // background-color: $tertiary-colour;
 }
 
 .profile {

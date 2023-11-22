@@ -34,7 +34,7 @@ const addUser = async (req, res) => {
       surname,
       email,
       password,
-      avatar_url: "/images/profile_image.jpg",
+      avatar_url: "http://localhost:8080/images/profile_image.jpg",
       //GET HELP WITH STATIC IMAGE LINKING
     };
 
@@ -112,6 +112,7 @@ const getUserFriends = async (req, res) => {
         surname: friend.surname,
         active: friend.active,
         avatar_url: friend.avatar_url,
+        expirationTime: friend.expirationTime,
         user_id: friend.user_id,
         friend_id: friend.friend_id,
       };

@@ -11,8 +11,6 @@ function DisplayUsers({ usersArray }) {
   return (
     <section className="display">
       {usersArray.slice(0).map((user) => {
-        // if (user.active === 1) {
-        // console.log(user.active === 1);
         return (
           <Link
             className="display__link"

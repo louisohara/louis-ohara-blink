@@ -4,7 +4,7 @@ import "./DisplayUsersActive.scss";
 import { useState } from "react";
 import DisplayPost from "../DisplayPost/DisplayPost";
 
-function DisplayUsersActive({ activeArray, currentUser, change }) {
+function DisplayUsersActive({ activeArray, currentUser }) {
   const sortedUsers = activeArray.slice().sort((a, b) => b.active - a.active);
   const [show, setShow] = useState(false);
   const [user, setUser] = useState(null);
@@ -18,7 +18,7 @@ function DisplayUsersActive({ activeArray, currentUser, change }) {
   const articlesArray = new Array(remainder).fill(null);
   return (
     <section className="display display--alt">
-      {currentUser.active === 1 && (
+      {currentUser.active === 1 ? (
         <article className="profile profile--alt">
           <div className="profile__wrapper profile__wrapper--alt">
             <img
@@ -35,6 +35,8 @@ function DisplayUsersActive({ activeArray, currentUser, change }) {
             {currentUser.first_name}
           </p>
         </article>
+      ) : (
+        ""
       )}
       {sortedUsers.slice(0, 6).map((user) => {
         if (user.active === 1) {

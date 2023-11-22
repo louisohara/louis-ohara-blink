@@ -76,60 +76,62 @@ function CreatePostForm({ userId, handleClose }) {
   };
 
   return (
-    <div className="modal">
-      <Button image={close} onClick={handleClose} />
-      <div className="form">
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="form__container">
-            <label htmlFor="duration" className="form__label">
-              How long are you free for?
-              <select
-                className="form__input" // Apply appropriate styling
-                name="duration"
-                id="duration"
-                value={fields.duration}
-                onChange={handleChange}
-              >
-                <option value="">Select duration</option>
-                <option value="1">1 Minutes</option>
-                <option value="2">2 Minutes</option>
-                <option value="3">3 Minutes</option>
-                <option value="5">5 Minutes</option>
+    <div className="modal__overlay">
+      <div className="modal">
+        <Button image={close} onClick={handleClose} />
+        <div className="form">
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form__container">
+              <label htmlFor="duration" className="form__label">
+                How long are you free for?
+                <select
+                  className="form__input" // Apply appropriate styling
+                  name="duration"
+                  id="duration"
+                  value={fields.duration}
+                  onChange={handleChange}
+                >
+                  <option value="">Select duration</option>
+                  <option value="1">1 Minutes</option>
+                  <option value="2">2 Minutes</option>
+                  <option value="3">3 Minutes</option>
+                  <option value="5">5 Minutes</option>
 
-                {/* Add other duration options as needed */}
-              </select>
-            </label>
-            <label htmlFor="content" className="form__label">
-              What do you want to do?
-              <textarea
-                name="content"
-                id="content"
-                cols="30"
-                rows="10"
-                className="form__input  form__input--textarea"
-                placeholder="Add a content to your video"
-                onChange={handleChange}
-              ></textarea>
-            </label>
-            {isError && (
-              <p className="form__response">Please fill both fields</p>
-            )}
-            {posted && (
-              <p className="form__response">
-                Post successful - redirecting to homepage
-              </p>
-            )}
-          </div>
-          <div className="form__button-container">
-            <button className="form__button">CANCEL</button>
-            <Button
-              image="none"
-              text="Post"
-              className="form__button--other"
-              type="submit"
-            />
-          </div>
-        </form>
+                  {/* Add other duration options as needed */}
+                </select>
+              </label>
+              <label htmlFor="content" className="form__label">
+                What do you want to do?
+                <textarea
+                  name="content"
+                  id="content"
+                  cols="30"
+                  rows="10"
+                  className="form__input  form__input--textarea"
+                  placeholder="Add a content to your video"
+                  onChange={handleChange}
+                ></textarea>
+              </label>
+              {isError && (
+                <p className="form__response">Please fill both fields</p>
+              )}
+              {posted && (
+                <p className="form__response">
+                  Post successful - redirecting to homepage
+                </p>
+              )}
+            </div>
+            <div className="form__button-container">
+              <button className="form__button">CANCEL</button>
+              <Button
+                image="none"
+                text="Post"
+                className="form__button--other"
+                type="submit"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

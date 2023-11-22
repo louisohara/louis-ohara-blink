@@ -8,19 +8,21 @@ import Button from "../components/Button/Button";
 import Upload from "../assets/Icons/upload.svg";
 import error from "../assets/Icons/error-24px.svg";
 import DisplayPost from "../components/DisplayPost/DisplayPost";
+import "../components/Modal/Modal.scss";
 
 // THIS PAGE NEEDS TO BE THE ID OF THE CURRENT USER
 // SHOULD BE PASSED THE ID OF THE USER FROM APP.JS VIA PROPS
 // LOGIN/AUTH WILL FEED ID INTO THIS PAGE.
 // this page is where the user can view their profile and create a post.
 
-function UserPage() {
+function UserPage({ currentUser }) {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(user);
   useEffect(() => {
     const getUser = async () => {
       const response = await axios.get(`http://localhost:8080/api/users/${id}`);
@@ -45,25 +47,41 @@ function UserPage() {
     <section className="user">
       This is the user page
       <DisplayUser user={user} />
-      {!show &&
-        (!user.active ? (
-          <Button image={Upload} onClick={handleShow} text="Activate" />
+      {currentUser.id !== user.id ? (
+        !user.active ? (
+          <DisplayPost
+            currentUser={currentUser}
+            user={user}
+            handleClose={handleClose}
+            handleShow={handleShow}
+            show={show}
+          />
         ) : (
-          <>
-            <DisplayPost
-              currentUser={user}
-              user={user}
-              handleClose={handleClose}
-              handleShow={handleShow}
-              show={show}
-            />
-            {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
-          </>
-        ))}
-      {show && (
-        <div className="modal__overlay">
-          <CreatePostForm userId={id} handleClose={handleClose} />
-        </div>
+          ""
+        )
+      ) : (
+        <>
+          {!show &&
+            (!user.active ? (
+              <Button image={Upload} onClick={handleShow} text="Activate" />
+            ) : (
+              <>
+                <DisplayPost
+                  currentUser={user}
+                  user={user}
+                  handleClose={handleClose}
+                  handleShow={handleShow}
+                  show={show}
+                />
+                {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
+              </>
+            ))}
+          {show && (
+            <div className="modal__overlay">
+              <CreatePostForm userId={id} handleClose={handleClose} />
+            </div>
+          )}
+        </>
       )}
     </section>
   );

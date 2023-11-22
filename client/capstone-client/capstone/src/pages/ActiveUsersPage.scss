@@ -1,0 +1,8 @@
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/typography";
+@use "../styles/partials/resets" as *;
+@use "../styles/partials/variables" as *;
+
+.active {
+  margin: 0 1rem;
+}

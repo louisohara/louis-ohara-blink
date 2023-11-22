@@ -71,28 +71,36 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
   }
 
   return (
-    <section className="user modal">
-      <Button image={close} onClick={handleClose} />
-      <article className="post">
-        <div className="post__icon-container">
-          <img
-            src={userPost.avatar_url}
-            alt={`${userPost.first_name}'s icon`}
-            className="post__icon"
-          />
+    <section className="user">
+      <div className="modal__overlay">
+        <div className="modal">
+          {/* {currentUser.id === user.id ? (
+        ""
+      ) : ( */}
+          <Button image={close} onClick={handleClose} />
+          {/* )} */}
+          <article className="post">
+            <div className="post__icon-container">
+              <img
+                src={userPost.avatar_url}
+                alt={`${userPost.first_name}'s icon`}
+                className="post__icon"
+              />
+            </div>
+            <div className="post__int-container">
+              <div className="post__flex-wrapper">
+                <h3 className="post__name">{`${userPost.first_name} ${userPost.surname}`}</h3>
+                <span className="post__timestamp">{userPost.created_at}</span>
+              </div>
+              <p className="post__post">{userPost.content}</p>
+            </div>
+          </article>
+          <DisplayPostComments postID={userPost.id} currentUser={currentUser} />
+          {currentUser.id === user.id && (
+            <Button image={error} onClick={handleToggle} text="Deactivate" />
+          )}
         </div>
-        <div className="post__int-container">
-          <div className="post__flex-wrapper">
-            <h3 className="post__name">{`${userPost.first_name} ${userPost.surname}`}</h3>
-            <span className="post__timestamp">{userPost.created_at}</span>
-          </div>
-          <p className="post__post">{userPost.content}</p>
-        </div>
-      </article>
-      <DisplayPostComments postID={userPost.id} currentUser={currentUser} />
-      {currentUser.id === user.id && (
-        <Button image={error} onClick={handleToggle} text="Deactivate" />
-      )}
+      </div>
     </section>
   );
 }

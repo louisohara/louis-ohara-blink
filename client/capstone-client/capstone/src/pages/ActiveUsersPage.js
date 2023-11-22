@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import "./ActiveUsersPage.scss";
 import DisplayUsersActive from "../components/DisplayUsersActive/DisplayUsersActive";
 
 function ActiveUsersPage({ currentUser }) {
@@ -53,6 +54,7 @@ function ActiveUsersPage({ currentUser }) {
         ) {
           console.log(user);
           updateUser(user.id);
+
           return { ...user, active: false };
         }
         return user;
@@ -65,6 +67,7 @@ function ActiveUsersPage({ currentUser }) {
         setChange(true);
       }
       setActive(updatedUsers);
+      // const sortedUsers = active.slice().sort((a, b) => b.active - a.active);
     };
 
     const intervalId = setInterval(expirationCheck, 15 * 1000);
@@ -87,7 +90,8 @@ function ActiveUsersPage({ currentUser }) {
       <DisplayUsersActive
         activeArray={active}
         currentUser={currentUser}
-        change={change}
+        // sortedUsers={sortedUsers}
+        // change={change}
       />
     </section>
   );
