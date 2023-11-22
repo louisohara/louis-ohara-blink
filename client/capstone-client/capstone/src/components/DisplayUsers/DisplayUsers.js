@@ -5,7 +5,9 @@ import "./DisplayUsers.scss";
 
 function DisplayUsers({ usersArray }) {
   // const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
-
+  const limit = 6;
+  const remainder = limit - usersArray.length;
+  const articlesArray = new Array(remainder).fill(null);
   return (
     <section className="display">
       {usersArray.slice(0).map((user) => {
@@ -30,19 +32,13 @@ function DisplayUsers({ usersArray }) {
           </Link>
         );
       })}
-      {usersArray === [] ? (
-        <article className="profile__empty">
+      {articlesArray.map((_, index) => (
+        <article key={index} className="profile__empty">
           <div className="profile__wrapper">
             <div className="profile__inner"></div>
           </div>
         </article>
-      ) : (
-        ""
-      )}
-      {/* // ); */}
-      {/* // } */}
-      {/* // return null; */}
-      {/* // })} */}
+      ))}
     </section>
   );
 }

@@ -77,28 +77,23 @@ const getPostComments = async (req, res) => {
   try {
     const userCommentsOnPostData = await knex("comments")
       .join("users", "users.id", "comments.author_id")
+      .select(
+        "comments.id",
+        "comments.post_id",
+        "comments.author_id",
+        "users.avatar_url",
+        "comments.comment",
+        "users.first_name",
+        "users.surname",
+        "comments.created_at"
+      )
       .where({ post_id: id });
     if (!userCommentsOnPostData) {
       return res.status(404).json({
         message: `Comments belonging to a post with ID ${req.params.id} not found`,
       });
     }
-    const userCommentsOnPostDataReduced = userCommentsOnPostData.map(
-      (comment) => {
-        const condensed = {
-          id: comment.id,
-          post_id: comment.post_id,
-          author_id: comment.author_id,
-          avatar_url: comment.avatar_url,
-          comment: comment.comment,
-          first_name: comment.first_name,
-          surname: comment.surname,
-          created_at: comment.created_at,
-        };
-        return condensed;
-      }
-    );
-    res.status(200).json(userCommentsOnPostDataReduced);
+    res.status(200).json(userCommentsOnPostData);
   } catch (error) {
     res.status(500).json({
       message: `Error retrieving comments belonging to that post: ${error}`,

@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <Header />
+        <Header currentUser={currentUser} />
         <main className="main">
           <div className="test">hey</div>
           <Routes>

@@ -34,7 +34,7 @@ const addUser = async (req, res) => {
       surname,
       email,
       password,
-      avatar_url: "http://localhost:8080/public/images/profile_image.jpg",
+      avatar_url: "/images/profile_image.jpg",
       //GET HELP WITH STATIC IMAGE LINKING
     };
 

@@ -6,6 +6,8 @@ import DisplayUser from "../components/DisplayUser/DisplayUser";
 import CreatePostForm from "../components/CreatePostForm/CreatePostForm";
 import Button from "../components/Button/Button";
 import Upload from "../assets/Icons/upload.svg";
+import error from "../assets/Icons/error-24px.svg";
+import DisplayPost from "../components/DisplayPost/DisplayPost";
 
 // THIS PAGE NEEDS TO BE THE ID OF THE CURRENT USER
 // SHOULD BE PASSED THE ID OF THE USER FROM APP.JS VIA PROPS
@@ -27,6 +29,15 @@ function UserPage() {
     getUser();
   }, [id, user]);
 
+  const handleToggle = async () => {
+    try {
+      await axios.put(`http://localhost:8080/api/users/${id}`, {
+        active: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   if (!user) {
     return <p>loading...</p>;
   }
@@ -34,8 +45,26 @@ function UserPage() {
     <section className="user">
       This is the user page
       <DisplayUser user={user} />
-      {!show && <Button image={Upload} onClick={handleShow} />}
-      {show && <CreatePostForm userId={id} handleClose={handleClose} />}
+      {!show &&
+        (!user.active ? (
+          <Button image={Upload} onClick={handleShow} text="Activate" />
+        ) : (
+          <>
+            <DisplayPost
+              currentUser={user}
+              user={user}
+              handleClose={handleClose}
+              handleShow={handleShow}
+              show={show}
+            />
+            {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
+          </>
+        ))}
+      {show && (
+        <div className="modal__overlay">
+          <CreatePostForm userId={id} handleClose={handleClose} />
+        </div>
+      )}
     </section>
   );
 }

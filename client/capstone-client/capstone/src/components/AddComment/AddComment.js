@@ -8,30 +8,47 @@ import axios from "axios";
 
 function AddComment({ postID, currentUser, getPostComments }) {
   const [comment, setComment] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const handleChange = (event) => {
     setComment(event.target.value);
+  };
+  const isFormValid = () => {
+    if (!comment) {
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(comment);
 
-    try {
-      const response = await axios.post("http://localhost:8080/api/comments", {
-        comment: comment,
-        post_id: postID,
-        author_id: currentUser.id,
-      });
-      if (response.status === 201) {
-        console.log("success!");
-        getPostComments();
-        setComment(null);
-      } else {
-        console.error("Comment creation failed.");
+    if (!isFormValid()) {
+      setErrors(true);
+      return;
+    } else {
+      setErrors(false);
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/comments",
+          {
+            comment: comment,
+            post_id: postID,
+            author_id: currentUser.id,
+          }
+        );
+        if (response.status === 201) {
+          setErrors(false);
+          console.log("success!");
+          getPostComments();
+          setComment(null);
+        } else {
+          console.error("Comment creation failed.");
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
   return (
@@ -48,6 +65,9 @@ function AddComment({ postID, currentUser, getPostComments }) {
           placeholder="Add a new comment"
           onChange={handleChange}
         ></textarea>
+        {errors && (
+          <p className="form__response">You haven't added a comment</p>
+        )}
       </div>
       <div className="conversation__button-container">
         <Button

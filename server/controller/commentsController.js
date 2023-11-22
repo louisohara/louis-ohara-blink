@@ -39,4 +39,17 @@ const editComment = async (req, res) => {
     res.status(500).json({ message: `Error editing comment: ${error}` });
   }
 };
-module.exports = { getAllComments, addComment, editComment };
+const deleteComment = async (req, res) => {
+  try {
+    const result = await knex("comments").where({ id: req.params.id }).del();
+    if (result === 0) {
+      return res
+        .status(404)
+        .json({ message: `Comment with ID ${id} not found` });
+    }
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: `Error deleting comment: ${error}` });
+  }
+};
+module.exports = { getAllComments, addComment, editComment, deleteComment };

@@ -13,7 +13,7 @@ function ActiveUsersPage({ currentUser }) {
       try {
         const { data } = await axios.get(baseURL);
         const currentTime = new Date();
-        // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
+        //       // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
         const filteredUsers = data.filter((user) => {
           const expirationTime = new Date(user.expirationTime);
           return expirationTime > currentTime;
@@ -37,7 +37,7 @@ function ActiveUsersPage({ currentUser }) {
 
   //   const expirationCheck = () => {
   //     const currentTime = new Date();
-  //     const updatedUsers = users.map((user) => {
+  //     const updatedUsers = active.map((user) => {
   //       if (user.active && new Date(user.expirationTime) <= currentTime) {
   //         updateUser(user.id); // Update user's active status
   //         return { ...user, active: false }; // Return updated user object
@@ -45,7 +45,7 @@ function ActiveUsersPage({ currentUser }) {
   //       return user; // Return unmodified user object
   //     });
 
-  //     setUsers(updatedUsers); // Update the state with updated users
+  //     setActive(updatedUsers); // Update the state with updated users
   //   };
 
   //   const intervalId = setInterval(expirationCheck, 15 * 1000); // Run expiration check every 15 seconds
@@ -53,7 +53,7 @@ function ActiveUsersPage({ currentUser }) {
   //   return () => {
   //     clearInterval(intervalId); // Cleanup on component unmount
   //   };
-  // }, [users]);
+  // }, [active]);
 
   // const updateUser = async (userId) => {
   //   try {
@@ -66,16 +66,13 @@ function ActiveUsersPage({ currentUser }) {
   // };
 
   if (!users || !active) {
+    // || !active
     return <p>Loading...</p>;
   }
   return (
     <section className="active">
       This is the active users page
-      <DisplayUsersActive
-        usersArray={users}
-        activeArray={active}
-        currentUser={currentUser}
-      />
+      <DisplayUsersActive activeArray={active} currentUser={currentUser} />
     </section>
   );
 }
