@@ -4,23 +4,27 @@ import axios from "axios";
 import DisplayUsersActive from "../components/DisplayUsersActive/DisplayUsersActive";
 
 function ActiveUsersPage({ currentUser }) {
-  const [users, setUsers] = useState(null);
+  // const [users, setUsers] = useState(null);
   const [active, setActive] = useState(null);
   const baseURL = "http://localhost:8080/api/users";
+  const [friends, setFriends] = useState(null);
+  const [change, setChange] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
+      //GETS FRIENDS OF THE CURRENT USER
       try {
-        const { data } = await axios.get(baseURL);
+        const { data } = await axios.get(
+          `${baseURL}/${currentUser.id}/friends`
+        );
         const currentTime = new Date();
-        //       // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
+        // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
         const filteredUsers = data.filter((user) => {
           const expirationTime = new Date(user.expirationTime);
           return expirationTime > currentTime;
         });
-        // console.log(filteredUsers);
-        // setUsers(filteredUsers);
-        setUsers(data);
+
+        setFriends(data.length);
         setActive(filteredUsers);
       } catch (error) {
         console.error(error);
@@ -30,49 +34,61 @@ function ActiveUsersPage({ currentUser }) {
   }, []);
 
   //THIS IS THE INTERVAL TIMER
-  // useEffect(() => {
-  //   if (!users || !Array.isArray(users)) {
-  //     return; // Ensure users data is available and valid
-  //   }
+  const updateUser = async (userId) => {
+    try {
+      await axios.put(`http://localhost:8080/api/users/${userId}`, {
+        active: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    const expirationCheck = () => {
+      const currentTimeUpdated = new Date();
+      const updatedUsers = active.map((user) => {
+        if (
+          user.active &&
+          new Date(user.expirationTime) <= currentTimeUpdated
+        ) {
+          console.log(user);
+          updateUser(user.id);
+          return { ...user, active: false };
+        }
+        return user;
+      });
+      if (
+        currentUser.active &&
+        new Date(currentUser.expirationTime) <= currentTimeUpdated
+      ) {
+        updateUser(currentUser.id);
+        setChange(true);
+      }
+      setActive(updatedUsers);
+    };
 
-  //   const expirationCheck = () => {
-  //     const currentTime = new Date();
-  //     const updatedUsers = active.map((user) => {
-  //       if (user.active && new Date(user.expirationTime) <= currentTime) {
-  //         updateUser(user.id); // Update user's active status
-  //         return { ...user, active: false }; // Return updated user object
-  //       }
-  //       return user; // Return unmodified user object
-  //     });
+    const intervalId = setInterval(expirationCheck, 15 * 1000);
 
-  //     setActive(updatedUsers); // Update the state with updated users
-  //   };
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [active]);
 
-  //   const intervalId = setInterval(expirationCheck, 15 * 1000); // Run expiration check every 15 seconds
+  //
 
-  //   return () => {
-  //     clearInterval(intervalId); // Cleanup on component unmount
-  //   };
-  // }, [active]);
-
-  // const updateUser = async (userId) => {
-  //   try {
-  //     await axios.put(`http://localhost:8080/api/users/${userId}`, {
-  //       active: false,
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  if (!users || !active) {
+  if (!active) {
     // || !active
     return <p>Loading...</p>;
   }
   return (
     <section className="active">
       This is the active users page
-      <DisplayUsersActive activeArray={active} currentUser={currentUser} />
+      {friends === 0 && <p>You have no friends - add friends to get started</p>}
+      <DisplayUsersActive
+        activeArray={active}
+        currentUser={currentUser}
+        change={change}
+      />
     </section>
   );
 }

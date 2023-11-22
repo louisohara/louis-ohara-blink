@@ -9,8 +9,9 @@ import UserPostsPage from "./pages/UserPostsPage.js";
 import UserFriendsPage from "./pages/UserFriendsPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import CreatePostPage from "./pages/CreatePostPage";
+
 import UserSignUpPage from "./pages/UserSignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 //GET THE ID OF THE CURRENT USER AND PASS AS PROPS TO:
 //USER PAGE
@@ -43,12 +44,18 @@ function App() {
         <main className="main">
           <div className="test">hey</div>
           <Routes>
-            <Route path="/signup" element={<UserSignUpPage />} />
+            <Route
+              path="/signup"
+              element={<UserSignUpPage setCurrentUser={setCurrentUser} />}
+            />
             <Route
               path="/"
               element={<ActiveUsersPage currentUser={currentUser} />}
             />
-            <Route path="/post" element={<CreatePostPage />} />
+            <Route
+              path="/login"
+              element={<LoginPage currentUser={currentUser} />}
+            />
             <Route path="/users/:id" element={<UserPage />} />
             <Route
               path="/users/:id/posts"
