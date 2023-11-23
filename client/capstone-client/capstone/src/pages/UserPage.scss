@@ -3,11 +3,17 @@
 @use "../styles/partials/resets" as *;
 @use "../styles/partials/variables" as *;
 
-.active-users {
+.user {
   @include mobile-container;
   margin: 0 auto;
   @include tablet {
     @include tablet-container;
+  }
+  &__flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   &__title {
     margin: -3rem 0 3rem;
@@ -21,10 +27,10 @@
       justify-content: space-around;
     }
   }
-  &__flex {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &__button {
+    @include tablet {
+      position: absolute;
+      bottom: -5rem;
+    }
   }
 }

@@ -8,13 +8,15 @@
   position: absolute;
   bottom: 0;
   margin: 0;
+  background-color: $alt-secondary-colour;
+  width: 100%;
   // margin: auto;
   // @include mobile-container;
   //MAKES SPACE FOR FOOTER - width of the footer elemetn upon tablet
   @include tablet {
     width: calc(100% - ($navbar-width));
     right: 0;
-    background-color: $alt-secondary-colour;
+
     // @include tablet-container;
   }
   &__div {

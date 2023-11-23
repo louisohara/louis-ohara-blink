@@ -72,7 +72,7 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
 
   return (
     <section className="user">
-      <div className="modal__overlay">
+      <div className="modal__overlay modal__overlay--alt">
         <div className="modal">
           {/* {currentUser.id === user.id ? (
         ""

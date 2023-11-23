@@ -20,6 +20,7 @@ import LoginPage from "./pages/LoginPage";
 //USERPOSTSPAGE - IN ORDER TO ADD COMMENTS
 
 function App() {
+  const [active, setActive] = useState(null);
   const [users, setUsers] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -41,7 +42,7 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Header currentUser={currentUser} />
-        <Footer currentUser={currentUser} />
+        <Footer currentUser={currentUser} active={active} />
         <main className="main">
           <div className="main__div"></div>
           <div className="main__inner">
@@ -52,7 +53,13 @@ function App() {
               />
               <Route
                 path="/"
-                element={<ActiveUsersPage currentUser={currentUser} />}
+                element={
+                  <ActiveUsersPage
+                    currentUser={currentUser}
+                    active={active}
+                    setActive={setActive}
+                  />
+                }
               />
               <Route
                 path="/login"

@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import "../Modal/Modal.scss";
 import close from "../../assets/Icons/close-24px.svg";
 import { useNavigate } from "react-router-dom";
+import "./CreatePostForm.scss";
 
 //TO DO -
 //FORM VALIDATION INCLUDING ERROR MESSAGE FIELDS

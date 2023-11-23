@@ -9,6 +9,7 @@ import Upload from "../assets/Icons/upload.svg";
 import error from "../assets/Icons/error-24px.svg";
 import DisplayPost from "../components/DisplayPost/DisplayPost";
 import "../components/Modal/Modal.scss";
+import "./UserPage.scss";
 
 // THIS PAGE NEEDS TO BE THE ID OF THE CURRENT USER
 // SHOULD BE PASSED THE ID OF THE USER FROM APP.JS VIA PROPS
@@ -45,44 +46,46 @@ function UserPage({ currentUser }) {
   }
   return (
     <section className="user">
-      This is the user page
-      <DisplayUser user={user} />
-      {currentUser.id !== user.id ? (
-        !user.active ? (
-          <DisplayPost
-            currentUser={currentUser}
-            user={user}
-            handleClose={handleClose}
-            handleShow={handleShow}
-            show={show}
-          />
+      <div className="user__container">
+        <div className="user__flex">
+          <h1 className="user__title">This is the user page</h1>
+          <DisplayUser user={user} />
+        </div>
+        {currentUser.id !== user.id ? (
+          !user.active ? (
+            <DisplayPost
+              currentUser={currentUser}
+              user={user}
+              handleClose={handleClose}
+              handleShow={handleShow}
+              show={show}
+            />
+          ) : (
+            ""
+          )
         ) : (
-          ""
-        )
-      ) : (
-        <>
-          {!show &&
-            (!user.active ? (
-              <Button image={Upload} onClick={handleShow} text="Activate" />
-            ) : (
-              <>
-                <DisplayPost
-                  currentUser={user}
-                  user={user}
-                  handleClose={handleClose}
-                  handleShow={handleShow}
-                  show={show}
-                />
-                {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
-              </>
-            ))}
-          {show && (
-            <div className="modal__overlay">
-              <CreatePostForm userId={id} handleClose={handleClose} />
-            </div>
-          )}
-        </>
-      )}
+          <>
+            {!show &&
+              (!user.active ? (
+                <div className="user__flex user__button">
+                  <Button image={Upload} onClick={handleShow} text="Activate" />
+                </div>
+              ) : (
+                <>
+                  <DisplayPost
+                    currentUser={user}
+                    user={user}
+                    handleClose={handleClose}
+                    handleShow={handleShow}
+                    show={show}
+                  />
+                  {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
+                </>
+              ))}
+            {show && <CreatePostForm userId={id} handleClose={handleClose} />}
+          </>
+        )}
+      </div>
     </section>
   );
 }

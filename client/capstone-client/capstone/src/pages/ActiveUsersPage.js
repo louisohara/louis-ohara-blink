@@ -4,9 +4,7 @@ import axios from "axios";
 import "./ActiveUsersPage.scss";
 import DisplayUsersActive from "../components/DisplayUsersActive/DisplayUsersActive";
 
-function ActiveUsersPage({ currentUser }) {
-  // const [users, setUsers] = useState(null);
-  const [active, setActive] = useState(null);
+function ActiveUsersPage({ currentUser, active, setActive }) {
   const baseURL = "http://localhost:8080/api/users";
   const [friends, setFriends] = useState(null);
   const [change, setChange] = useState(false);
@@ -27,6 +25,7 @@ function ActiveUsersPage({ currentUser }) {
 
         setFriends(data.length);
         setActive(filteredUsers);
+        console.log(active);
       } catch (error) {
         console.error(error);
       }
@@ -47,26 +46,21 @@ function ActiveUsersPage({ currentUser }) {
   useEffect(() => {
     const expirationCheck = () => {
       const currentTimeUpdated = new Date();
+
       const updatedUsers = active.map((user) => {
         if (
           user.active &&
           new Date(user.expirationTime) <= currentTimeUpdated
         ) {
-          console.log(user);
           updateUser(user.id);
 
           return { ...user, active: false };
         }
         return user;
       });
-      if (
-        currentUser.active &&
-        new Date(currentUser.expirationTime) <= currentTimeUpdated
-      ) {
-        updateUser(currentUser.id);
-        setChange(true);
-      }
+
       setActive(updatedUsers);
+
       // const sortedUsers = active.slice().sort((a, b) => b.active - a.active);
     };
 
@@ -84,15 +78,21 @@ function ActiveUsersPage({ currentUser }) {
     return <p>Loading...</p>;
   }
   return (
-    <section className="active">
-      This is the active users page
-      {friends === 0 && <p>You have no friends - add friends to get started</p>}
-      <DisplayUsersActive
-        activeArray={active}
-        currentUser={currentUser}
-        // sortedUsers={sortedUsers}
-        // change={change}
-      />
+    <section className="active-users">
+      <div className="active-users__container">
+        <div className="active-users__flex">
+          <h1 className="active-users__title">This is the active users page</h1>
+          {friends === 0 && (
+            <p>You have no friends - add friends to get started</p>
+          )}
+          <DisplayUsersActive
+            activeArray={active}
+            currentUser={currentUser}
+            // sortedUsers={sortedUsers}
+            // change={change}
+          />
+        </div>
+      </div>
     </section>
   );
 }

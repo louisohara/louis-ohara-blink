@@ -26,6 +26,8 @@
   &-image {
     position: absolute;
     left: 1rem;
+    width: 1.5rem;
+    filter: invert(100%);
   }
 
   @include mobile-only {

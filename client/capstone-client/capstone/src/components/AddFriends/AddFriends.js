@@ -1,5 +1,6 @@
 import Button from "../Button/Button";
-import search from "../../assets/Icons/search-24px.svg";
+import add from "../../assets/Icons/addition.png";
+import search from "../../assets/Icons/search.svg";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -8,9 +9,13 @@ import Fuse from "fuse.js";
 import DisplayUser from "../DisplayUser/DisplayUser";
 import close from "../../assets/Icons/close-24px.svg";
 import "../../components/Modal/Modal.scss";
+import "./AddFriends.scss";
+import DisplayUsers from "../DisplayUsers/DisplayUsers";
 
 function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
-  const formattedUsers = users.map((user) => ({
+  const filteredUsers = users.filter((user) => user.id !== currentUser.id);
+
+  const formattedUsers = filteredUsers.map((user) => ({
     ...user,
     fullName: `${user.first_name} ${user.surname}`,
   }));
@@ -60,6 +65,9 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
   const handleOnSelect = (selectedItem) => {
     setFriendUser(selectedItem);
   };
+  const handleClear = () => {
+    setFriendUser(null);
+  };
 
   const formatResult = (item) => {
     return (
@@ -75,40 +83,61 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <section>
-      <Button image={search} onClick={handleShow} />
+    <section className="add-friends">
+      <div className="add-friends__button">
+        {!show && <Button image={search} onClick={handleShow} text="Search" />}
+      </div>
       {show && (
-        <div className="modal">
-          <Button image={close} onClick={handleClose} />
-          This is the add friends component
-          <div style={{ width: 400 }}>
-            <ReactSearchAutocomplete
-              items={formattedUsers}
-              onSearch={() => {
-                setSearchResults();
-              }}
-              onHover={() => {}}
-              onSelect={handleOnSelect}
-              onFocus={() => {}}
-              fuseOptions={{ keys: ["first_name"] }}
-              resultStringKeyName="fullName"
-              autoFocus
-              formatResult={formatResult}
-              name="fullName"
-              id="fullName"
-            />
-            {friendUser && (
-              <div>
-                <form className="form" onSubmit={handleSubmit}>
-                  <label htmlFor="user" className="form__label">
-                    Selected Profile:
-                  </label>
-                  <DisplayUser user={friendUser} />
-                  {/* <p>Name: {`${friendUser.first_name} ${friendUser.surname}`}</p> */}
-                  <Button image={search} text="Add Friend" type="submit" />
-                </form>
+        <div className="modal__overlay modal__overlay--friends">
+          <div className="modal modal__friends">
+            <div className="add-friends__inner">
+              <div className="add-friends__close">
+                <div className="add-friends__image-container">
+                  <img
+                    src={close}
+                    onClick={handleClose}
+                    className="add-friends__image"
+                  />
+                </div>
+
+                <p className="add-friends__text">
+                  Search for friends to get started
+                </p>
               </div>
-            )}
+              <div style={{ width: 400 }}>
+                <ReactSearchAutocomplete
+                  items={formattedUsers}
+                  onSearch={() => {
+                    setSearchResults();
+                  }}
+                  onHover={() => {}}
+                  onSelect={handleOnSelect}
+                  onClear={handleClear}
+                  onFocus={() => {}}
+                  fuseOptions={{ keys: ["first_name"] }}
+                  resultStringKeyName="fullName"
+                  autoFocus
+                  formatResult={formatResult}
+                  name="fullName"
+                  id="fullName"
+                />
+                {friendUser && (
+                  <div>
+                    <form className="add-friends__form" onSubmit={handleSubmit}>
+                      <label htmlFor="user" className="add-friends__form-label">
+                        Selected Profile:
+                      </label>
+                      {!friendUser && <DisplayUsers />}
+                      {friendUser && <DisplayUser user={friendUser} />}
+                      {/* <p>Name: {`${friendUser.first_name} ${friendUser.surname}`}</p> */}
+                      <div className="add-friends__button">
+                        <Button image={add} text="Add Friend" type="submit" />
+                      </div>
+                    </form>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -5,7 +5,7 @@ import "./Footer.scss";
 
 import { NavLink } from "react-router-dom";
 
-const Footer = ({ currentUser }) => {
+const Footer = ({ currentUser, active }) => {
   return (
     <footer className="footer">
       <nav className="footer__navbar">
@@ -18,6 +18,11 @@ const Footer = ({ currentUser }) => {
                   alt="Link to active friends"
                   className="footer__icon"
                 />
+                {active && active.length > 0 ? (
+                  <div className="footer__active">{active.length}</div>
+                ) : (
+                  ""
+                )}
               </div>
             </NavLink>
             <NavLink to={`/users/${currentUser.id}`} className="footer__link">
