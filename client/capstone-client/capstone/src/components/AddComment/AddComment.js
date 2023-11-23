@@ -2,11 +2,19 @@ import add_comment from "../../assets/Icons/add_comment.svg";
 import Button from "../Button/Button";
 import { useState } from "react";
 import axios from "axios";
+import error from "../../assets/Icons/error-24px.svg";
+import "./AddComment.scss";
 
 //ADD COMMENT MUST PASS THE ID OF THE CURRENT USER/COMMENTER TO THE API
 //MUST RECEIVE THE ID AS A PROP.
 
-function AddComment({ postID, currentUser, getPostComments }) {
+function AddComment({
+  postID,
+  currentUser,
+  getPostComments,
+  userId,
+  handleToggle,
+}) {
   const [comment, setComment] = useState(null);
   const [errors, setErrors] = useState(null);
 
@@ -52,30 +60,40 @@ function AddComment({ postID, currentUser, getPostComments }) {
     }
   };
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <div className="form__container">
-        <label htmlFor="comment" className="form__label">
+    <form className="conversation-form" onSubmit={handleSubmit}>
+      <div className="conversation-form__container">
+        {/* <label htmlFor="comment" className="conversation-form__label">
           JOIN THE CONVERSATION
-        </label>
+        </label> */}
         <textarea
           type="text"
           name="comment"
           id="comment"
-          className="form__input"
+          className="conversation-form__input"
           placeholder="Add a new comment"
           onChange={handleChange}
         ></textarea>
         {errors && (
-          <p className="form__response">You haven't added a comment</p>
+          <p className="conversation-form__error">
+            You haven't added a comment
+          </p>
         )}
       </div>
-      <div className="conversation__button-container">
+      <div className="conversation-form__button-container">
         <Button
           image={add_comment}
           text="COMMENT"
-          className="conversation__button"
+          alt="comment"
           type="submit"
         />
+        {currentUser.id === userId && (
+          <Button
+            image={error}
+            onClick={handleToggle}
+            text="DELETE"
+            alt="comment"
+          />
+        )}
       </div>
     </form>
   );

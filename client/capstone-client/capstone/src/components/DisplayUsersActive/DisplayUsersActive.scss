@@ -30,11 +30,31 @@
       height: 100%;
       position: fixed;
       top: 0;
+      left: 0;
       z-index: 1;
     }
   }
 }
-.profile {
+.profile-active {
+  position: relative;
+  &__wrapper {
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: $shadow;
+    object-fit: cover;
+    position: relative;
+  }
+  &__name {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    text-decoration: none;
+    color: $white-2;
+    font-weight: $font-demi;
+    font-size: $size-sub-header;
+    // bottom: 1rem;
+  }
   &__empty {
     height: 200px;
     width: 200px;

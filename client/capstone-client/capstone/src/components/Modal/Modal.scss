@@ -25,7 +25,7 @@
     width: 100%;
 
     @include mobile-only {
-      z-index: 1;
+      z-index: 2;
     }
     height: 100%;
     @include tablet {
@@ -33,17 +33,24 @@
       // width: 50%;
     }
   }
-  &__overlay--friends {
+  &__overlay--friends,
+  &__overlay--post {
     @include mobile-only {
       position: fixed;
       top: 0;
       left: 0;
     }
   }
-  &__overlay--alt {
+  &__overlay--post {
     @include mobile-only {
-      // display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
+  }
+  &__friends {
+    padding: 0;
+    border: 2px solid $logo-colour;
   }
   //   &__inner {
   //     width: 90%;

@@ -6,11 +6,10 @@ import "../Modal/Modal.scss";
 import close from "../../assets/Icons/close-24px.svg";
 import { useNavigate } from "react-router-dom";
 import "./CreatePostForm.scss";
+import error from "../../assets/Icons/error-24px.svg";
+import logo from "../../assets/Icons/publish.svg";
 
 //TO DO -
-//FORM VALIDATION INCLUDING ERROR MESSAGE FIELDS
-//FORM SUBMISSION NAVIGATION TO WHO'S AVAILABLE PAGE
-
 function CreatePostForm({ userId, handleClose }) {
   const navigate = useNavigate();
   const [fields, setFields] = useState({
@@ -77,62 +76,82 @@ function CreatePostForm({ userId, handleClose }) {
   };
 
   return (
-    <div className="modal__overlay">
-      <div className="modal">
-        <Button image={close} onClick={handleClose} />
-        <div className="form">
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="form__container">
-              <label htmlFor="duration" className="form__label">
-                How long are you free for?
-                <select
-                  className="form__input" // Apply appropriate styling
-                  name="duration"
-                  id="duration"
-                  value={fields.duration}
-                  onChange={handleChange}
-                >
-                  <option value="">Select duration</option>
-                  <option value="1">1 Minutes</option>
-                  <option value="2">2 Minutes</option>
-                  <option value="3">3 Minutes</option>
-                  <option value="5">5 Minutes</option>
-
-                  {/* Add other duration options as needed */}
-                </select>
-              </label>
-              <label htmlFor="content" className="form__label">
-                What do you want to do?
-                <textarea
-                  name="content"
-                  id="content"
-                  cols="30"
-                  rows="10"
-                  className="form__input  form__input--textarea"
-                  placeholder="Add a content to your video"
-                  onChange={handleChange}
-                ></textarea>
-              </label>
-              {isError && (
-                <p className="form__response">Please fill both fields</p>
-              )}
-              {posted && (
-                <p className="form__response">
-                  Post successful - redirecting to homepage
-                </p>
-              )}
-            </div>
-            <div className="form__button-container">
-              <button className="form__button">CANCEL</button>
-              <Button
-                image="none"
-                text="Post"
-                className="form__button--other"
-                type="submit"
-              />
-            </div>
-          </form>
+    <div className="modal__overlay modal__overlay--post">
+      <div className="modal modal--post">
+        <div className="form__cancel">
+          <div className="form__image-container">
+            <img src={close} onClick={handleClose} className="form__image" />
+          </div>
         </div>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="form__container">
+            <label htmlFor="content" className="form__label">
+              What do you want to do?{" "}
+            </label>
+            <textarea
+              name="content"
+              id="content"
+              cols="30"
+              rows="5"
+              className={`form__input  form__input--textarea ${
+                isError && fields.content ? "form__input--error" : ""
+              }`}
+              placeholder="I'm in the mood for..."
+              onChange={handleChange}
+            ></textarea>
+            {isError && !fields.duration ? (
+              <div className="form__error-container">
+                <img src={error} className="form__icon" />
+                <p className="form__error">This field is required</p>
+              </div>
+            ) : (
+              ""
+            )}
+            <label htmlFor="duration" className="form__label">
+              How long are you free for?
+            </label>
+            <select
+              className={`form__input form__input--select${
+                isError && fields.duration ? "form__input--error" : ""
+              }`} // Apply appropriate styling
+              name="duration"
+              id="duration"
+              value={fields.duration}
+              onChange={handleChange}
+            >
+              <option value="">Select your availability</option>
+              <option value="1">1 Minutes</option>
+              <option value="2">2 Minutes</option>
+              <option value="3">3 Minutes</option>
+              <option value="5">5 Minutes</option>
+
+              {/* Add other duration options as needed */}
+            </select>
+            <div className="form__divider"></div>
+            {isError && !fields.duration ? (
+              <div className="form__error-container">
+                <img src={error} className="form__icon" />
+                <p className="form__error">This field is required</p>
+              </div>
+            ) : (
+              ""
+            )}
+            {posted && (
+              <p className="form__response">
+                Post successful - redirecting to homepage
+              </p>
+            )}
+
+            <div className="form__button-container">
+              <button className="form__button--submit" type="submit">
+                <div className="form__button--wrapper">
+                  <img src={logo} alt="" className="form__button-image" />
+                  <p className="form__button-text">SUBMIT</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

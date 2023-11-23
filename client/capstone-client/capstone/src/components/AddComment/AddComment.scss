@@ -1,0 +1,43 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+@use "../../styles/partials/variables" as *;
+
+.conversation-form {
+  &__button-container {
+    display: flex;
+    gap: 0.5rem;
+  }
+  &__container {
+    margin: 1rem;
+  }
+  &__input {
+    height: 4rem;
+    margin-top: 0.5rem;
+    border: solid 1px $alt-tertiary-colour;
+    border-radius: 5px;
+    background-color: $white-2;
+    padding: 1rem;
+    font-family: "Titillium Web";
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    &::placeholder {
+      color: $primary-colour;
+      font-family: "Titillium Web";
+      font-size: 1rem;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      border: solid 2px $secondary-colour;
+    }
+  }
+  &__error {
+    color: $background-red;
+    &-container {
+      display: flex;
+      gap: 0.25rem;
+    }
+  }
+}

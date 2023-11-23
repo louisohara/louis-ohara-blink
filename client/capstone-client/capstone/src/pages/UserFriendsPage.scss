@@ -21,11 +21,13 @@
   &__flex {
     @include tablet {
       display: flex;
+      justify-content: center;
+      position: relative;
     }
   }
   &__add {
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
   }
 }

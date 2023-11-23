@@ -1,3 +1,5 @@
+import "./DisplayUser.scss";
+
 function DisplayUser({ user }) {
   return (
     <article className="profile">

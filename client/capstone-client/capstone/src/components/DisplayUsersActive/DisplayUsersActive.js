@@ -20,19 +20,19 @@ function DisplayUsersActive({ activeArray, currentUser }) {
     <section className="display-active display-active--alt">
       <div className="display-active__container">
         {currentUser.active === 1 ? (
-          <article className="profile profile--alt">
-            <div className="profile__wrapper profile__wrapper--alt">
+          <article className="profile-active profile-active--alt">
+            <div className="profile-active__wrapper profile-active__wrapper--alt">
               <img
                 src={currentUser.avatar_url}
                 alt="Your Profile"
-                className="profile__image profile__image--alt"
+                className="profile-active__image profile-active__image--alt"
                 onClick={() => {
                   handleShow();
                   setUser(currentUser);
                 }}
               />
             </div>
-            <p className="profile__name profile__name--alt">
+            <p className="profile-active__name profile-active__name--alt">
               {currentUser.first_name}
             </p>
           </article>
@@ -42,40 +42,40 @@ function DisplayUsersActive({ activeArray, currentUser }) {
         {sortedUsers.slice(0, 6).map((user) => {
           if (user.active === 1) {
             return (
-              <article className="profile">
-                <div className="profile__wrapper">
+              <article className="profile-active">
+                <div className="profile-active__wrapper">
                   <img
                     src={user.avatar_url}
                     alt="User Profile"
-                    className="profile__image"
+                    className="profile-active__image"
                     onClick={() => {
                       handleShow();
                       setUser(user);
                     }}
                   />
                 </div>
-                <p className="profile__name">{user.first_name}</p>
+                <p className="profile-active__name">{user.first_name}</p>
               </article>
             );
           }
         })}
         {articlesArray.map((_, index) => (
-          <article key={index} className="profile__empty">
-            <div className="profile__wrapper">
-              <div className="profile__inner"></div>
+          <article key={index} className="profile-active__empty">
+            <div className="profile-active__wrapper">
+              <div className="profile-active__inner"></div>
             </div>
           </article>
         ))}
       </div>
 
       {show && (
-        <div className="display-active__modal">
-          <DisplayPost
-            handleClose={handleClose}
-            user={user}
-            currentUser={currentUser}
-          />
-        </div>
+        // <div className="display-active__modal">
+        <DisplayPost
+          handleClose={handleClose}
+          user={user}
+          currentUser={currentUser}
+        />
+        // </div>
       )}
     </section>
   );

@@ -31,7 +31,9 @@ function UserFriendsPage({ currentUser, users }) {
   return (
     <section className="friends">
       <div className="friends_container">
-        <h1 className="friends__title">This is the user friends page</h1>
+        <h1 className="friends__title">
+          You have {userFriends.length} friends
+        </h1>
         <div className="friends__flex">
           <DisplayUsers usersArray={userFriends} />
           <div className="friends__add">

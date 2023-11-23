@@ -9,6 +9,7 @@ import close from "../../assets/Icons/close-24px.svg";
 import error from "../../assets/Icons/error-24px.svg";
 import CreatePostForm from "../CreatePostForm/CreatePostForm";
 import Upload from "../../assets/Icons/upload.svg";
+import "./DisplayPost.scss";
 
 //THIS IS THE PAGE THAT IS LINKED TO ONCE THE ACTIVE PROFILE IS CLICKED.
 //IT SHOULD RECEIVE THE ID OF THE SELECTED PROFILE AS A PROP.
@@ -58,26 +59,34 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
     return (
       <>
         {!show && (
-          <Button image={Upload} onClick={handleShow} text="Activate" />
+          <Button
+            image={Upload}
+            onClick={handleShow}
+            text="Activate"
+            alt="user"
+          />
         )}
         {show && (
           <div className="modal__overlay">
             <CreatePostForm userId={user.id} handleClose={handleClose} />
           </div>
         )}
-        ;
       </>
     );
   }
 
   return (
     <section className="user">
-      <div className="modal__overlay modal__overlay--alt">
+      <div className="modal__overlay modal__overlay--post">
         <div className="modal">
           {/* {currentUser.id === user.id ? (
         ""
       ) : ( */}
-          <Button image={close} onClick={handleClose} />
+          <div className="post__cancel">
+            <div className="post__image-container">
+              <img src={close} onClick={handleClose} className="post__image" />
+            </div>
+          </div>
           {/* )} */}
           <article className="post">
             <div className="post__icon-container">
@@ -95,10 +104,15 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
               <p className="post__post">{userPost.content}</p>
             </div>
           </article>
-          <DisplayPostComments postID={userPost.id} currentUser={currentUser} />
-          {currentUser.id === user.id && (
+          <DisplayPostComments
+            postID={userPost.id}
+            currentUser={currentUser}
+            userId={user.id}
+            handleToggle={handleToggle}
+          />
+          {/* {currentUser.id === user.id && (
             <Button image={error} onClick={handleToggle} text="Deactivate" />
-          )}
+          )} */}
         </div>
       </div>
     </section>

@@ -48,8 +48,19 @@ function UserPage({ currentUser }) {
     <section className="user">
       <div className="user__container">
         <div className="user__flex">
-          <h1 className="user__title">This is the user page</h1>
+          {!show && <h1 className="user__title">YOUR PROFILE</h1>}
           <DisplayUser user={user} />
+
+          {user.active !== 0 ? (
+            <div className="user__details">
+              <p className="user__info">LAST ACTIVE: {user.expirationTime}</p>
+            </div>
+          ) : (
+            <div className="user__details user__details--active">
+              <div className="user__details-status"></div>
+              <p className="user__info--active">ACTIVE NOW</p>
+            </div>
+          )}
         </div>
         {currentUser.id !== user.id ? (
           !user.active ? (
@@ -67,10 +78,15 @@ function UserPage({ currentUser }) {
           <>
             {!show &&
               (!user.active ? (
-                <div className="user__flex user__button">
-                  <Button image={Upload} onClick={handleShow} text="Activate" />
-                </div>
+                // <div className="user__flex">
+                <Button
+                  image={Upload}
+                  onClick={handleShow}
+                  text="Activate"
+                  alt="user"
+                />
               ) : (
+                // </div>
                 <>
                   <DisplayPost
                     currentUser={user}

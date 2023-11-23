@@ -55,6 +55,7 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
       if (response.status === 201) {
         setIsAdded(true);
         getUserFriends();
+        setFriendUser(false);
         handleClose();
       }
     } catch (error) {
@@ -105,24 +106,27 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
                 </p>
               </div>
               <div style={{ width: 400 }}>
-                <ReactSearchAutocomplete
-                  items={formattedUsers}
-                  onSearch={() => {
-                    setSearchResults();
-                  }}
-                  onHover={() => {}}
-                  onSelect={handleOnSelect}
-                  onClear={handleClear}
-                  onFocus={() => {}}
-                  fuseOptions={{ keys: ["first_name"] }}
-                  resultStringKeyName="fullName"
-                  autoFocus
-                  formatResult={formatResult}
-                  name="fullName"
-                  id="fullName"
-                />
+                <div className="add-friends__search">
+                  <ReactSearchAutocomplete
+                    items={formattedUsers}
+                    onSearch={() => {
+                      setSearchResults();
+                    }}
+                    onHover={() => {}}
+                    onSelect={handleOnSelect}
+                    onClear={handleClear}
+                    onFocus={() => {}}
+                    placeholder="Please enter a name"
+                    fuseOptions={{ keys: ["first_name"] }}
+                    resultStringKeyName="fullName"
+                    autoFocus
+                    formatResult={formatResult}
+                    name="fullName"
+                    id="fullName"
+                  />
+                </div>
                 {friendUser && (
-                  <div>
+                  <div className="add-friends__results">
                     <form className="add-friends__form" onSubmit={handleSubmit}>
                       <label htmlFor="user" className="add-friends__form-label">
                         Selected Profile:
@@ -130,9 +134,20 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
                       {!friendUser && <DisplayUsers />}
                       {friendUser && <DisplayUser user={friendUser} />}
                       {/* <p>Name: {`${friendUser.first_name} ${friendUser.surname}`}</p> */}
-                      <div className="add-friends__button">
-                        <Button image={add} text="Add Friend" type="submit" />
+                      <div className="add-friends__button--alt">
+                        <Button
+                          image={add}
+                          text="Add Friend"
+                          type="submit"
+                          alt="friends"
+                        />
                       </div>
+                      {errors && <p>You are already friends with this user.</p>}
+                      {friendUser && isAdded ? (
+                        <p>Successfully added user: {friendUser.first_name}</p>
+                      ) : (
+                        ""
+                      )}
                     </form>
                   </div>
                 )}
@@ -141,8 +156,6 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
           </div>
         </div>
       )}
-      {errors && <p>You are already friends with this user.</p>}
-      {isAdded && <p>Successfully added user: {friendUser.first_name}</p>}
     </section>
   );
 }
