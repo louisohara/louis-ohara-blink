@@ -1,0 +1,32 @@
+@use "./styles/partials/mixins" as *;
+@use "./styles/partials/typography";
+@use "./styles/partials/resets" as *;
+@use "./styles/partials/variables" as *;
+
+.main {
+  height: calc(100% - ($header-height));
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  background-color: $alt-secondary-colour;
+  width: 100%;
+  // margin: auto;
+  // @include mobile-container;
+  //MAKES SPACE FOR FOOTER - width of the footer elemetn upon tablet
+  @include tablet {
+    width: calc(100% - ($navbar-width));
+    right: 0;
+
+    // @include tablet-container;
+  }
+  &__div {
+    background-color: $secondary-colour;
+    margin: 0;
+    height: 25.125%;
+    //ALIGN THE MAIN DIV WITH THE NAVLINKS
+  }
+  &__inner {
+    position: relative;
+    top: -15%;
+  }
+}

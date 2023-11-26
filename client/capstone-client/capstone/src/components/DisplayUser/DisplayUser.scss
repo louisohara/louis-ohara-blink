@@ -1,0 +1,10 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+@use "../../styles/partials/variables" as *;
+
+.profile {
+  &__name {
+    text-shadow: $shadow-2;
+  }
+}

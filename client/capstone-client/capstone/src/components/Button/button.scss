@@ -1,0 +1,95 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/typography" as *;
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: $font;
+  font-size: $size-sub-header;
+  height: 3rem;
+  border-radius: 25px;
+  border: 2px solid $logo-colour;
+  background-color: $alt-logo;
+  color: $white-1;
+  margin: 1rem 0;
+  min-width: 30%;
+  transition: background-color 0.15s;
+
+  &--user {
+    max-width: 30%;
+    margin: auto;
+    @include tablet {
+      position: absolute;
+      bottom: -5rem;
+    }
+  }
+  &--comment {
+    min-width: fit-content;
+    margin: 0;
+    padding: 0.5rem;
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 0.5rem;
+    &--delete {
+      gap: 0;
+    }
+    &__comment {
+      justify-content: center;
+    }
+    &--friends {
+      align-items: center;
+      padding: 0 0.5rem;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $white-1;
+    color: $logo-colour;
+
+    img {
+      filter: invert(100%);
+    }
+    img.button__image--friends {
+      filter: none;
+    }
+    p {
+      font-weight: 600;
+    }
+  }
+
+  // @include mobile-only {
+  //   width: 100%;
+  // }
+  @include tablet {
+    padding: 1rem 4rem;
+    margin: 1rem 1.5rem;
+    &--comment {
+      min-width: fit-content;
+      margin: 0;
+      padding: 0.5rem;
+    }
+  }
+  &__image--friends {
+    filter: invert(100%);
+    width: 2rem;
+    height: 2rem;
+  }
+  &--delete {
+    background-color: $white-1;
+    padding: 0;
+    margin: 0;
+    min-width: fit-content;
+  }
+  &--deactivate {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+}

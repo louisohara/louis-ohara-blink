@@ -1,0 +1,33 @@
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/typography";
+@use "../styles/partials/resets" as *;
+@use "../styles/partials/variables" as *;
+
+.friends {
+  @include mobile-container;
+  margin: 0 auto;
+  @include tablet {
+    @include tablet-container;
+  }
+  &__title {
+    margin: -3rem 0 6rem 0;
+    text-align: center;
+
+    font-size: $size-header;
+    color: $white-1;
+    background-color: $alt-secondary-colour;
+  }
+
+  &__flex {
+    @include tablet {
+      display: flex;
+      justify-content: center;
+      // position: relative;
+    }
+  }
+  &__add {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+  }
+}

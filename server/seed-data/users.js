@@ -1,0 +1,51 @@
+module.exports = [
+  //TO DO - GET THE REMAINING PROFILE PICS from people
+  {
+    id: 1,
+    first_name: "Zeid",
+    surname: "Bsaibes",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/zeid.jpeg",
+  },
+  {
+    id: 2,
+    first_name: "Edo",
+    surname: "Emmerich",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/edo.jpg",
+  },
+  {
+    id: 3,
+    first_name: "James",
+    surname: "Cook",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/james.jpg",
+  },
+  {
+    id: 4,
+    first_name: "Yasmin",
+    surname: "Adan",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/yasmin.jpg",
+  },
+  {
+    id: 5,
+    first_name: "Anoushka",
+    surname: "Patel",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/anoushka.jpg",
+  },
+  {
+    id: 6,
+    first_name: "Lucie",
+    surname: "Gavrilova",
+    email: "random@gmail.com",
+    password: "ilovelouis",
+    avatar_url: "http://localhost:8080/images/lucie.png",
+  },
+];

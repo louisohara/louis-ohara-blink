@@ -1,0 +1,30 @@
+@use "../styles/partials/mixins" as *;
+@use "../styles/partials/typography";
+@use "../styles/partials/resets" as *;
+@use "../styles/partials/variables" as *;
+
+.active-users {
+  @include mobile-container;
+  margin: 0 auto;
+  @include tablet {
+    @include tablet-container;
+  }
+  &__title {
+    margin: -3rem 0 3rem;
+    font-size: $size-header;
+    color: $white-1;
+    background-color: $alt-secondary-colour;
+  }
+  &__container {
+    @include tablet {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  &__flex {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

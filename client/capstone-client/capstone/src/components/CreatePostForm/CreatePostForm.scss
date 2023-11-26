@@ -1,0 +1,104 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+@use "../../styles/partials/variables" as *;
+
+.form {
+  &__cancel {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__image-container {
+    margin: 0.5rem 0.5rem 0 0;
+    order: 2;
+    width: fit-content;
+  }
+  &__image {
+    filter: invert(100%);
+    background-color: $secondary-colour;
+    border-radius: 25%;
+    cursor: pointer;
+  }
+  &__container {
+    padding: 0 1rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  &__input {
+    margin-top: 0.5rem;
+    border: solid 1px $alt-tertiary-colour;
+    border-radius: 5px;
+    background-color: $white-2;
+    padding: 1rem;
+    font-family: "Titillium Web";
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    &::placeholder {
+      color: $primary-colour;
+      font-family: "Titillium Web";
+      font-size: 1rem;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      border: solid 2px $secondary-colour;
+    }
+  }
+  &__error {
+    color: $background-red;
+    &-container {
+      display: flex;
+      gap: 0.25rem;
+    }
+  }
+  &__label {
+    font-weight: 600;
+    font-size: $size-sub-header;
+    padding-bottom: 0.5rem;
+  }
+  &__button--submit {
+    cursor: pointer;
+    width: 100%;
+    border: 2px solid $alt-logo;
+    border-radius: 25px;
+    color: $logo-colour;
+    background-color: $white-1;
+    font-size: $size-sub-header;
+    font-weight: 600;
+    @include tablet {
+      padding: 0 2rem;
+
+      width: fit-content;
+    }
+    &:hover {
+      background-color: $alt-secondary-colour;
+      border: 2px solid $secondary-colour;
+      color: $white-1;
+    }
+  }
+  &__button-container {
+    @include tablet {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+  &__button--wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  &__button-image {
+    margin-left: -1rem;
+    filter: invert(100%);
+  }
+  &__button-text {
+    margin: 0.5rem 0;
+  }
+  &__divider {
+    margin: 1.5rem 0;
+    width: 100%;
+    border: 2px solid $alt-tertiary-colour;
+    border-radius: 50px;
+  }
+}

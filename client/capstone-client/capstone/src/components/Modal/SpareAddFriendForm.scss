@@ -1,0 +1,96 @@
+//   console.log(userFriends);
+//   const filteredUsers = users.filter((user) => {
+//     return !userFriends.includes(user.id);
+//   });
+//   console.log(filteredUsers);
+//   console.log(users);
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+
+//     try {
+//       console.log(friendUser);
+//       const response = await axios.post("http://localhost:8080/api/friends", {
+//         friend_id: friendUser,
+//         user_id: currentUser.id,
+//       });
+//       if (response.status === 201) {
+//         console.log(`Success adding friend user:${friendUser} `);
+//         setIsAdded(true);
+//         getUserFriends();
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       setErrors(true);
+//     }
+//   };
+//   // AUTOCOMPLETE PREDICTIVE
+//   const handleOnSearch = (string, results) => {
+//     // onSearch will have as the first callback parameter
+//     // the string searched and for the second the results.
+//     console.log(string, results);
+//   };
+//   const handleOnHover = (result) => {
+//     // the item hovered
+//     console.log(result);
+//   };
+
+//   const handleOnSelect = (selectedItem) => {
+//     setFriendUser(selectedItem.id);
+//     // the item selected
+//     console.log(selectedItem);
+//   };
+
+//   const handleOnFocus = () => {
+//     console.log("Focused");
+//   };
+//   const formatResult = (item) => {
+//     return (
+//       <>
+//         <span style={{ display: "block", textAlign: "left" }}>
+//           {`${item.first_name} ${item.surname}`}
+//         </span>
+//       </>
+//     );
+//   };
+//   return (
+//     <section>
+//       This is the add friends component
+//       <form className="form" onSubmit={handleSubmit}>
+//         <label htmlFor="user" className="form__label">
+//           Add Friend:
+//         </label>
+//         <select
+//           id="user"
+//           name="user"
+//           className="form__select"
+//           value={friendUser}
+//           onChange={handleChange}
+//         >
+//           <option value="">Please select</option>
+//           {filteredUsers.map((user) => (
+//             <option key={`${user.id}`} value={`${user.id}`}>
+//               {`${user.first_name} ${user.surname}`}
+//             </option>
+//           ))}
+//         </select>
+//         {errors && <p>You are already friends with this user.</p>}
+//         {isAdded && <p>Successfully added user: {friendUser}</p>}
+//         <Button image={search} text="Add Friend" type="submit" />
+//       </form>
+//       <div style={{ width: 400 }}>
+//         <ReactSearchAutocomplete
+//           items={formattedUsers}
+//           onSearch={handleOnSearch}
+//           onHover={handleOnHover}
+//           onSelect={handleOnSelect}
+//           onFocus={handleOnFocus}
+//           fuseOptions={{ keys: ["first_name", "surname"] }}
+//           //     // necessary, otherwise the results will be blank
+//           resultStringKeyName="fullName"
+//           autoFocus
+//           formatResult={formatResult}
+//         />
+//       </div>
+//     </section>
+//   );

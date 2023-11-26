@@ -4,14 +4,15 @@
 
 Potential NAMEs:
 
-- TIG
+- TIG:
 - hook: idea is that pressing the button throws a net/is fishing for plans
+- IP
 
 ## Overview
 
 ## What is your app? Brief description in a couple of sentences.
 
-An app that you use when you're free/have no plans in order to alert your friends that you want to hangout. With the press of a button, you can declare your availability and specify how long you are available for. As well as sending your friends a notification, pressing the button will display your profile as a post to your network on the who's available page - where your friends can respond/comment in order to arrange plans with you.
+An app that you use when you're free/have no plans in order to alert your friends that you want to hangout. With the press of a button, you can declare your availability and specify how long you are available for. As well as sending your friends a notification (NICE TO HAVE), pressing the button will display your profile as a post to your network on the who's available page - where your friends can respond/comment in order to arrange plans with you.
 
 My app allows users to arrange spontaneous plans with friends when they find themselves without them - as well as allowing users to see what their friends are doing and join any open invite plans on the app.
 
@@ -118,7 +119,7 @@ user_id,
 
 When searching for friends, the user can see a list of their current friends under the search panel.
 
-/POSTS/ - A list of all posts made by all users. All posts aren't displayed as profiles must be clicked on to return the specific user's post.
+/POSTS/ - A list of all posts made by all users. Posts are displayed relevant to the user, only after the user's profile is clicked on, to return the specific user's post.
 
 Posts are objects created after users press the create post button via a handleClick event/axios.post request.
 
@@ -159,13 +160,25 @@ Describe your data and the relationships between them. You can show this visuall
 
 Users and posts have a one to many relationship. Each post can only be authored by one user, each user can have multiple posts.
 
-Users:
+Users: BACK-END TABLE
 
-Users are objects containing: {
+user {
+id: BIGINT(20)
+email:VARCHAR(50)
+password:VARCHAR(50)
+first_name:VARCHAR(50)
+last_name:VARCHAR(50)
+photo: upload
+createdAt: DATETIME
+}
+
+FRONT-END: Users are objects containing: {
 id: random UUID,
+user_email: email @auth,
+user_password: password ,
 user_name: user name,
 user_photo: user photo,
-friends: [ user_id, user_id, user_id ], user_id is FOREIGN KEY
+friends: [ user_id, user_id, user_id ], user_id is FOREIGN KEY - JOINED ON FRONT END
 active: true/false
 }
 
@@ -173,16 +186,44 @@ Users can have many posts. (Although only 1 will be active)
 
 Posts belong to only one user.
 
-Posts are objects containing: {
-id: random UUID, primary key
-author_id: user id, FOREIGN KEY linking to Users table
-related_users: [ friends with array ], - joined from Users table
+BACK-END Posts table: {
+id: BIGINT(20)
+author_id: BIGINT(20) - foreign key
+description: VARCHAR(250)
+durationValue: DATETIME
+createdAt: DATETIME
+}
+
+BACK-END POSTS COMMENT table: {
+id: BIGINT(20)
+post_id: BIGINT(20) - foreign key
+author_id: BIGINT(20) - foreign key
+description: VARCHAR(250),
+createdAt: DATETIME,
+}
+
+FRONT-END comment object {
+
+id: BIGINT(20), primary key
+post_id: BIGINT(20) - foreign key
+author_id: BIGINT(20) - foreign key
+description: VARCHAR(250),
+createdAt: DATETIME,
+userName: , JOINED FROM USERS
+userPhoto: , JOINED FROM USERS
+
+}
+
+FRONT-END POST OBJECT
+Posts {
+id: post_id, PRIMARY KEY
+author_id: user_id, FOREIGN KEY
 user_name: user name, - joined from Users
 description: post description,
 duration: user's availability duration,
 user_photo: user photo, - joined from Users
 post_createdAt: timestamp,
-comments: [ {comment} , {comment} , ]
+comments: [ {comment} , {comment} , ] - joined from
 }
 
 Comment objects contain {
@@ -224,22 +265,26 @@ Current user will dictate the friends and posts displayed.
 ## Roadmap - Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
 
 1. Create DATABASE and fill using mysql2 and knex migrations/seeds.
-   - create Users migration file.
-   - create Posts migration file.
-   - view tables in workBench
-   - fill with default/demo values seeds
-2. Build the API server routers/controllers
-   - app.use("/api/posts", postsRouter);
-   - app.use("/api/users", usersRouter);
-   - test using Postman
+   - create Users migration file. DONE
+   - create Posts migration file. DONE
+   - view tables in workBench. DONE
+   - fill with default/demo values seeds. DONE
+2. Build the API server routers/controllers DONE
+   - app.use("/api/posts", postsRouter); DONE
+   - app.use("/api/users", usersRouter); DONE
+   - test using Postman; DONE
 3. Build front-end in following order:
-   - React Routing
-   - Header/Footer Components
-   - Who's free page
-   - I'm free page
-   - Display Post Modal
-   - Sign-up page
-   - Add friends page
+
+- React Routing - DONE
+  function heavy components:
+  - Sign-up page with AUTH and headers {Bearer "JWT TOKEN"}
+  - Who's free page
+  - I'm free page - create posts/make users active
+  - Display Post Modal
+  - Add friends page
+    Styling components:
+  - Create Header/Footer Components
+
 4. Review page functionality.
 5. Review page styling.
 

@@ -1,0 +1,57 @@
+@use "./variables" as *;
+
+@mixin reset-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+@mixin mobile-only {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin image($image) {
+  background-image: $image;
+  background-position: center;
+  background-size: cover;
+}
+
+@mixin mobile-container {
+  max-width: 95%;
+}
+
+@mixin tablet-container {
+  max-width: 90%;
+}
+@mixin desktop-container {
+  max-width: 80%;
+}
+@mixin desktop-container-special {
+  margin-left: 15%;
+}
+@mixin underline {
+  border-bottom: solid 4px $tertiary-colour;
+}
+
+@mixin underline-alt {
+  border-bottom: solid 4px $alt-tertiary-colour;
+}
+
+@mixin reset-link {
+  text-decoration: none;
+  color: $alt-secondary-colour;
+}
