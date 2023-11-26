@@ -54,4 +54,9 @@
   &__post {
     margin: 0;
   }
+  &__extra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

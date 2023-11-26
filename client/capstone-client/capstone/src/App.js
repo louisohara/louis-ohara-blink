@@ -23,16 +23,25 @@ function App() {
   const [active, setActive] = useState(null);
   const [users, setUsers] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [posted, setPosted] = useState(false);
 
+  const setPostedTrue = () => {
+    setPosted(true);
+  };
+
+  const setPostedFalse = () => {
+    setPosted(false);
+  };
   //GET THE MOST RECENT USER ADDED - the user profile most recently added should be the current user
   useEffect(() => {
     const getCurrentUser = async () => {
       const response = await axios.get(`http://localhost:8080/api/users/`);
       setUsers(response.data);
       setCurrentUser(response.data[response.data.length - 1]);
+      // setCurrentUser(response.data[2]);
     };
     getCurrentUser();
-  }, []);
+  }, [posted]);
 
   if (!currentUser || !users) {
     return <p>loading...</p>;
@@ -58,6 +67,9 @@ function App() {
                     currentUser={currentUser}
                     active={active}
                     setActive={setActive}
+                    users={users}
+                    posted={posted}
+                    setPostedFalse={setPostedFalse}
                   />
                 }
               />
@@ -67,7 +79,13 @@ function App() {
               />
               <Route
                 path="/users/:id"
-                element={<UserPage currentUser={currentUser} />}
+                element={
+                  <UserPage
+                    currentUser={currentUser}
+                    posted={posted}
+                    setPostedTrue={setPostedTrue}
+                  />
+                }
               />
               <Route
                 path="/users/:id/posts"

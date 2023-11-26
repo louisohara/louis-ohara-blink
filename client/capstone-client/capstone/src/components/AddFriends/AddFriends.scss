@@ -10,15 +10,10 @@
   &__button {
     width: 100%;
     position: absolute;
-    top: 0;
+    top: 3rem;
     left: 0;
     display: flex;
     justify-content: center;
-
-    @include tablet {
-      top: unset;
-      bottom: -5rem;
-    }
   }
 
   &__close {

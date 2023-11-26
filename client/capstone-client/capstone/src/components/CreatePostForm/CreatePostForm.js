@@ -10,13 +10,12 @@ import error from "../../assets/Icons/error-24px.svg";
 import logo from "../../assets/Icons/publish.svg";
 
 //TO DO -
-function CreatePostForm({ userId, handleClose }) {
+function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
   const navigate = useNavigate();
   const [fields, setFields] = useState({
     duration: "",
     content: "",
   });
-  const [posted, setPosted] = useState(false);
 
   const [isError, setIsError] = useState(false);
 
@@ -61,7 +60,7 @@ function CreatePostForm({ userId, handleClose }) {
         if (response.status === 201) {
           setIsError(false);
           handleClose();
-          setPosted(true);
+          setPostedTrue();
           setTimeout(() => {
             navigate("/");
           }, 2000);
@@ -124,10 +123,9 @@ function CreatePostForm({ userId, handleClose }) {
               <option value="2">2 Minutes</option>
               <option value="3">3 Minutes</option>
               <option value="5">5 Minutes</option>
-
-              {/* Add other duration options as needed */}
+              <option value="120">2 Hours</option>
             </select>
-            <div className="form__divider"></div>
+
             {isError && !fields.duration ? (
               <div className="form__error-container">
                 <img src={error} className="form__icon" />
@@ -136,11 +134,12 @@ function CreatePostForm({ userId, handleClose }) {
             ) : (
               ""
             )}
-            {posted && (
+            <div className="form__divider"></div>
+            {/* {posted && (
               <p className="form__response">
                 Post successful - redirecting to homepage
               </p>
-            )}
+            )} */}
 
             <div className="form__button-container">
               <button className="form__button--submit" type="submit">

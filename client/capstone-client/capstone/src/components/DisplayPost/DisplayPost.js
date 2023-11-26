@@ -11,19 +11,15 @@ import CreatePostForm from "../CreatePostForm/CreatePostForm";
 import Upload from "../../assets/Icons/upload.svg";
 import "./DisplayPost.scss";
 
-//THIS IS THE PAGE THAT IS LINKED TO ONCE THE ACTIVE PROFILE IS CLICKED.
-//IT SHOULD RECEIVE THE ID OF THE SELECTED PROFILE AS A PROP.
-// THIS PAGE DISPLAYS THE POSTS MADE BY THE ACTIVE USER.
-//THIS PAGE SHOULD PASS THE ID OF THE SELECTED PROFILE AS AN ARGUMENT TO:
-// - add comment page.
-
-//TO DO - styling of post
-// - timestamp conversion
-
-function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
-  //   const { id } = useParams();
+function DisplayPost({
+  currentUser,
+  handleClose,
+  user,
+  handleShow,
+  show,
+  setShow,
+}) {
   const [userPost, setUserPost] = useState(null);
-  // const [show, setShow] = useState(false);
 
   useEffect(() => {
     const getUserPost = async () => {
@@ -31,29 +27,57 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
         `http://localhost:8080/api/users/${user.id}/posts`
       );
       const currentTime = new Date();
-      // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
+
       const filteredPosts = response.data.filter((post) => {
         const expirationTime = new Date(post.expirationTime);
         return expirationTime > currentTime;
       });
-      // DISPLAYS ONLY POSTS THAT HAVE YET TO EXPIRE
+
       setUserPost(filteredPosts[0]);
-      // setUserPost(response.data[0]);
-      // console.log(response.data);
-      console.log(userPost);
     };
     getUserPost();
   }, [user.id]);
 
   const handleToggle = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/users/${user.id}`, {
-        active: false,
-      });
+      const expirationTime = new Date(Date.now());
+      const formattedExpirationTime = expirationTime
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+      const response = await axios.put(
+        `http://localhost:8080/api/users/${user.id}`,
+        {
+          active: false,
+          expirationTime: formattedExpirationTime,
+        }
+      );
+      if (response.status === 200) {
+        setShow(false);
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
+  function formatISODateTime(ISODateTimeString) {
+    const date = new Date(ISODateTimeString);
+
+    const dd = String(date.getDate()).padStart(2, "0");
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const yyyy = date.getFullYear();
+
+    let hh = date.getHours();
+    const min = String(date.getMinutes()).padStart(2, "0");
+    const amOrPm = hh >= 12 ? "PM" : "AM";
+
+    hh = hh % 12 || 12; // Convert to 12-hour clock
+
+    const formattedDate = `${dd}/${mm}/${yyyy}`;
+    const formattedTime = `${hh}:${min} ${amOrPm}`;
+
+    return { date: formattedDate, time: formattedTime };
+  }
 
   if (!userPost) {
     return (
@@ -79,15 +103,12 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
     <section className="user">
       <div className="modal__overlay modal__overlay--post">
         <div className="modal">
-          {/* {currentUser.id === user.id ? (
-        ""
-      ) : ( */}
           <div className="post__cancel">
             <div className="post__image-container">
               <img src={close} onClick={handleClose} className="post__image" />
             </div>
           </div>
-          {/* )} */}
+
           <article className="post">
             <div className="post__icon-container">
               <img
@@ -99,7 +120,9 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
             <div className="post__int-container">
               <div className="post__flex-wrapper">
                 <h3 className="post__name">{`${userPost.first_name} ${userPost.surname}`}</h3>
-                <span className="post__timestamp">{userPost.created_at}</span>
+                <span className="post__timestamp">
+                  {formatISODateTime(userPost.created_at).time}
+                </span>
               </div>
               <p className="post__post">{userPost.content}</p>
             </div>
@@ -110,9 +133,14 @@ function DisplayPost({ currentUser, handleClose, user, handleShow, show }) {
             userId={user.id}
             handleToggle={handleToggle}
           />
-          {/* {currentUser.id === user.id && (
-            <Button image={error} onClick={handleToggle} text="Deactivate" />
-          )} */}
+          {currentUser.id === user.id && (
+            <Button
+              image={error}
+              onClick={handleToggle}
+              text="Deactivate"
+              alt="deactivate"
+            />
+          )}
         </div>
       </div>
     </section>

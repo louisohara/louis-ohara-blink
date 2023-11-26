@@ -16,22 +16,12 @@ import "./UserPage.scss";
 // LOGIN/AUTH WILL FEED ID INTO THIS PAGE.
 // this page is where the user can view their profile and create a post.
 
-function UserPage({ currentUser }) {
+function UserPage({ currentUser, posted, setPostedTrue }) {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  console.log(user);
-  useEffect(() => {
-    const getUser = async () => {
-      const response = await axios.get(`http://localhost:8080/api/users/${id}`);
-      setUser(response.data);
-    };
-    getUser();
-  }, [id, user]);
-
   const handleToggle = async () => {
     try {
       await axios.put(`http://localhost:8080/api/users/${id}`, {
@@ -41,6 +31,34 @@ function UserPage({ currentUser }) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await axios.get(`http://localhost:8080/api/users/${id}`);
+      setUser(response.data);
+    };
+    getUser();
+  }, [id, handleToggle]);
+
+  function formatISODateTime(ISODateTimeString) {
+    const date = new Date(ISODateTimeString);
+
+    const dd = String(date.getDate()).padStart(2, "0");
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const yyyy = date.getFullYear();
+
+    let hh = date.getHours();
+    const min = String(date.getMinutes()).padStart(2, "0");
+    const amOrPm = hh >= 12 ? "PM" : "AM";
+
+    hh = hh % 12 || 12; // Convert to 12-hour clock
+
+    const formattedDate = `${dd}/${mm}/${yyyy}`;
+    const formattedTime = `${hh}:${min} ${amOrPm}`;
+
+    return { date: formattedDate, time: formattedTime };
+  }
+
   if (!user) {
     return <p>loading...</p>;
   }
@@ -48,12 +66,18 @@ function UserPage({ currentUser }) {
     <section className="user">
       <div className="user__container">
         <div className="user__flex">
-          {!show && <h1 className="user__title">YOUR PROFILE</h1>}
+          {!show && (
+            <h1 className="user__title">
+              {currentUser.id === user.id ? "YOUR PROFILE" : "PROFILE"}
+            </h1>
+          )}
           <DisplayUser user={user} />
 
-          {user.active !== 0 ? (
+          {user.active === 0 ? (
             <div className="user__details">
-              <p className="user__info">LAST ACTIVE: {user.expirationTime}</p>
+              <p className="user__info">
+                LAST ACTIVE: {formatISODateTime(user.expirationTime).time}
+              </p>
             </div>
           ) : (
             <div className="user__details user__details--active">
@@ -77,7 +101,7 @@ function UserPage({ currentUser }) {
         ) : (
           <>
             {!show &&
-              (!user.active ? (
+              (user.active === 0 ? (
                 // <div className="user__flex">
                 <Button
                   image={Upload}
@@ -94,11 +118,19 @@ function UserPage({ currentUser }) {
                     handleClose={handleClose}
                     handleShow={handleShow}
                     show={show}
+                    setShow={setShow}
                   />
                   {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
                 </>
               ))}
-            {show && <CreatePostForm userId={id} handleClose={handleClose} />}
+            {show && (
+              <CreatePostForm
+                userId={id}
+                handleClose={handleClose}
+                posted={posted}
+                setPostedTrue={setPostedTrue}
+              />
+            )}
           </>
         )}
       </div>

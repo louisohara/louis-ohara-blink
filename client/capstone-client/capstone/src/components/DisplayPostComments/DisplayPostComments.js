@@ -5,6 +5,7 @@ import AddComment from "../AddComment/AddComment";
 import deleteComment from "../../assets/Icons/delete_outline-24px.svg";
 import Button from "../Button/Button";
 import "./DisplayPostComments.scss";
+import error from "../../assets/Icons/error-24px.svg";
 
 function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
   const [postComments, setPostComments] = useState(null);
@@ -20,7 +21,24 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
       console.error(error);
     }
   };
+  function formatISODateTime(ISODateTimeString) {
+    const date = new Date(ISODateTimeString);
 
+    const dd = String(date.getDate()).padStart(2, "0");
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const yyyy = date.getFullYear();
+
+    let hh = date.getHours();
+    const min = String(date.getMinutes()).padStart(2, "0");
+    const amOrPm = hh >= 12 ? "PM" : "AM";
+
+    hh = hh % 12 || 12; // Convert to 12-hour clock
+
+    const formattedDate = `${dd}/${mm}/${yyyy}`;
+    const formattedTime = `${hh}:${min} ${amOrPm}`;
+
+    return { date: formattedDate, time: formattedTime };
+  }
   useEffect(() => {
     getPostComments();
   }, [postID]);
@@ -73,7 +91,9 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
               <div className="comment__flex-wrapper">
                 <h3 className="comment__name">{`${comment.first_name} ${comment.surname}`}</h3>
 
-                <span className="comment__timestamp">{comment.created_at}</span>
+                <span className="comment__timestamp">
+                  {formatISODateTime(comment.created_at).time}
+                </span>
               </div>
               <div className="comment__extra">
                 <p className="comment__post">{comment.comment}</p>
@@ -100,7 +120,6 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
         currentUser={currentUser}
         getPostComments={getPostComments}
         userId={userId}
-        handleToggle={handleToggle}
       />
     </>
   );

@@ -37,6 +37,8 @@
 }
 .profile-active {
   position: relative;
+  cursor: pointer;
+
   &__wrapper {
     height: 200px;
     border-radius: 15px;

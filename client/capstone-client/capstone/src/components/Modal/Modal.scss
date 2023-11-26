@@ -16,11 +16,17 @@
   border-radius: 25px;
   padding: 0.5rem;
   transform: translate(-50%, -50%);
+
   @include tablet {
     position: static;
     transform: none;
   }
-
+  &--active {
+    @include tablet {
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+  }
   &__overlay {
     width: 100%;
 
@@ -34,11 +40,18 @@
     }
   }
   &__overlay--friends,
-  &__overlay--post {
+  &__overlay--post,
+  &__overlay--active {
     @include mobile-only {
       position: fixed;
       top: 0;
       left: 0;
+    }
+  }
+  &__overlay--active {
+    @include tablet {
+      position: fixed;
+      top: 0;
     }
   }
   &__overlay--post {

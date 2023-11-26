@@ -125,6 +125,17 @@ const getUserFriends = async (req, res) => {
     });
   }
 };
+const deleteUser = async (req, res) => {
+  try {
+    const result = await knex("users").where({ id: req.params.id }).del();
+    if (result === 0) {
+      return res.status(404).json({ message: `User with ID ${id} not found` });
+    }
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: `Error deleting user: ${error}` });
+  }
+};
 
 module.exports = {
   getAllUsers,
@@ -133,4 +144,5 @@ module.exports = {
   editUser,
   getUserPosts,
   getUserFriends,
+  deleteUser,
 };

@@ -8,13 +8,7 @@ import "./AddComment.scss";
 //ADD COMMENT MUST PASS THE ID OF THE CURRENT USER/COMMENTER TO THE API
 //MUST RECEIVE THE ID AS A PROP.
 
-function AddComment({
-  postID,
-  currentUser,
-  getPostComments,
-  userId,
-  handleToggle,
-}) {
+function AddComment({ postID, currentUser, getPostComments }) {
   const [comment, setComment] = useState(null);
   const [errors, setErrors] = useState(null);
 
@@ -80,20 +74,7 @@ function AddComment({
         )}
       </div>
       <div className="conversation-form__button-container">
-        <Button
-          image={add_comment}
-          text="COMMENT"
-          alt="comment"
-          type="submit"
-        />
-        {currentUser.id === userId && (
-          <Button
-            image={error}
-            onClick={handleToggle}
-            text="DELETE"
-            alt="comment"
-          />
-        )}
+        <Button image={add_comment} alt="comment" type="submit" />
       </div>
     </form>
   );

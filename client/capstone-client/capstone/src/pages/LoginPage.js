@@ -13,21 +13,14 @@ function LoginPage({ currentUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/users/${currentUser.id}`
-      );
-      if (response.status === 200) {
-        console.log(response.data);
-        console.log(event.target.email.value);
-        console.log(event.target.password.value);
+      const response = await axios.post("http://localhost:8080/auth/login", {
+        email: event.target.email.value,
+        password: event.target.password.value,
+      });
 
-        if (
-          response.data.email == event.target.email.value &&
-          response.data.password == event.target.password.value
-        ) {
-          navigate("/");
-        }
-      }
+      sessionStorage.setItem("token", response.data.token);
+      console.log(response.data.token);
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError(error.response.data);
@@ -44,7 +37,7 @@ function LoginPage({ currentUser }) {
       </form>
 
       <p>
-        Need an account? <Link to="/signup">Log in</Link>
+        Need an account? <Link to="/signup">Sign up</Link>
       </p>
     </main>
   );

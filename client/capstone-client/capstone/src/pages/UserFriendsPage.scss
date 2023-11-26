@@ -10,7 +10,7 @@
     @include tablet-container;
   }
   &__title {
-    margin: -3rem 0 3rem 0;
+    margin: -3rem 0 6rem 0;
     text-align: center;
 
     font-size: $size-header;
@@ -22,7 +22,7 @@
     @include tablet {
       display: flex;
       justify-content: center;
-      position: relative;
+      // position: relative;
     }
   }
   &__add {
