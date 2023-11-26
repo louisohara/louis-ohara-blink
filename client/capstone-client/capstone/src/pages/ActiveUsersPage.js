@@ -94,7 +94,7 @@ function ActiveUsersPage({
 
   if (!active) {
     // || !active
-    return <p>Loading...</p>;
+    return <p></p>;
   }
   return (
     <section className="active-users">

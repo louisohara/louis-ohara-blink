@@ -40,7 +40,7 @@ function UserPostsPage({ currentUser }) {
   }, [id]);
 
   if (!userPost) {
-    return <p>loading...</p>;
+    return <p></p>;
   }
 
   return (

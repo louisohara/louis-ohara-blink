@@ -26,7 +26,7 @@ function UserFriendsPage({ currentUser, users }) {
   }, [currentUser.id]);
 
   if (!userFriends) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
   return (
     <section className="friends">
