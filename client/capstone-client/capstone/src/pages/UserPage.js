@@ -64,13 +64,13 @@ function UserPage({ currentUser, posted, setPostedTrue }) {
   }
   return (
     <section className="user">
+      {!show && (
+        <h1 className="user__title">
+          {currentUser.id === user.id ? "YOUR PROFILE" : "PROFILE"}
+        </h1>
+      )}
       <div className="user__container">
         <div className="user__flex">
-          {!show && (
-            <h1 className="user__title">
-              {currentUser.id === user.id ? "YOUR PROFILE" : "PROFILE"}
-            </h1>
-          )}
           <DisplayUser user={user} />
 
           {user.active === 0 ? (

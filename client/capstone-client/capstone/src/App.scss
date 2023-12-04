@@ -10,6 +10,7 @@
   margin: 0;
   background-color: $alt-secondary-colour;
   width: 100%;
+  font-family: $font;
   // margin: auto;
   // @include mobile-container;
   //MAKES SPACE FOR FOOTER - width of the footer elemetn upon tablet
@@ -22,11 +23,17 @@
   &__div {
     background-color: $secondary-colour;
     margin: 0;
-    height: 25.125%;
+    height: 30%;
     //ALIGN THE MAIN DIV WITH THE NAVLINKS
   }
   &__inner {
     position: relative;
-    top: -15%;
+    top: -20%;
   }
+}
+#tsparticles,
+.particles,
+.particles-two {
+  height: 100%;
+  overflow: hidden;
 }

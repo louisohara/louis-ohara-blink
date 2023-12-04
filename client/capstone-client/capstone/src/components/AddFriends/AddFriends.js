@@ -81,7 +81,10 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
   };
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setFriendUser(false);
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
   return (
     <section className="add-friends">
@@ -131,7 +134,7 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
                       <label htmlFor="user" className="add-friends__form-label">
                         Selected Profile:
                       </label>
-                      {!friendUser && <DisplayUsers />}
+                      {/* {!friendUser && <DisplayUsers />} */}
                       {friendUser && <DisplayUser user={friendUser} />}
                       {/* <p>Name: {`${friendUser.first_name} ${friendUser.surname}`}</p> */}
                       <div className="add-friends__button--alt">

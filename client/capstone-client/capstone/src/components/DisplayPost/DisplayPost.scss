@@ -11,22 +11,64 @@
   border: 2px solid $secondary-colour;
   border-radius: 25px;
   padding: 0.5rem;
-  // justify-content: ;
-  &__cancel {
+
+  &__outer {
+    margin: 0.5rem;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  // justify-content: ;
+  // &__cancel {
+  //   display: flex;
+  //   justify-content: flex-end;
+  // }
+  // &__image-container {
+  //   margin: 0.5rem 0.5rem 0 0;
+  //   order: 2;
+  //   width: fit-content;
+  // }
+  // &__image {
+  //   filter: invert(100%);
+  //   background-color: $secondary-colour;
+  //   border-radius: 25%;
+  //   cursor: pointer;
+  // }
+  &__close {
+    display: flex;
+    justify-content: space-between;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    overflow: hidden;
+    background-color: $alt-logo;
   }
   &__image-container {
-    margin: 0.5rem 0.5rem 0 0;
+    margin: 1rem;
     order: 2;
     width: fit-content;
+    border-radius: 25%;
+    height: 27.75px;
+    background-color: $white-1;
+    border: 3px solid $logo-colour;
+    &:hover {
+      background-color: $logo-colour;
+    }
   }
   &__image {
-    filter: invert(100%);
-    background-color: $secondary-colour;
     border-radius: 25%;
     cursor: pointer;
+    &:hover {
+      filter: invert(100%);
+    }
   }
+  &__text {
+    order: 1;
+    margin: 0.5rem 1rem;
+    color: $white-1;
+    font-weight: 600;
+    font-size: $size-sub-header;
+  }
+
   &__icon {
     width: 5rem;
   }

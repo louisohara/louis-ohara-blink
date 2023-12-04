@@ -4,11 +4,16 @@
 @use "../styles/partials/variables" as *;
 
 .user {
-  @include mobile-container;
-  margin: 0 auto;
-  @include tablet {
-    @include tablet-container;
-  }
+  display: flex;
+  justify-content: center;
+  margin: 0 2rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  // @include mobile-container;
+  // margin: 0 auto;
+  // @include tablet {
+  //   @include tablet-container;
+  // }
   &__flex {
     display: flex;
     flex-direction: column;
@@ -19,7 +24,8 @@
     margin: -3rem 0 3rem;
     font-size: $size-header;
     color: $white-1;
-    background-color: $alt-secondary-colour;
+    display: flex;
+    justify-content: center;
   }
   &__container {
     @include mobile-only {
@@ -28,7 +34,7 @@
     }
     @include tablet {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       gap: 5rem;
     }
   }

@@ -6,7 +6,7 @@
 //add a z-index
 .footer {
   margin: 0;
-  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-2;
   @include tablet {
     width: $navbar-width;
   }
@@ -72,7 +72,7 @@
     }
   }
   &__link.active {
-    border-top: 2px solid $secondary-colour;
+    border-top: 4px solid $secondary-colour;
     background-color: $alt-secondary-colour;
     margin: 0;
 

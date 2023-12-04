@@ -11,9 +11,11 @@ const Header = ({ currentUser }) => {
         <div className="header__wrapper">
           <Link to="/" className="header__link">
             <img className="header__logo" src={logo} alt="Logo" />
-            {/* <img src={brand} alt="Logo" className="header__logo" /> */}
           </Link>
         </div>
+        {/* <h1 className="header__wrapper header__wrapper--alt">
+          Make the most of your time. Make the most of your friends.
+        </h1> */}
       </nav>
     </header>
   );

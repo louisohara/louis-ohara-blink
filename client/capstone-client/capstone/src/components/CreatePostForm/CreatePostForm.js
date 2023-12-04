@@ -77,11 +77,18 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
   return (
     <div className="modal__overlay modal__overlay--post">
       <div className="modal modal--post">
-        <div className="form__cancel">
+        <div className="form__close">
           <div className="form__image-container">
             <img src={close} onClick={handleClose} className="form__image" />
           </div>
+
+          <p className="form__text">Post to your friends</p>
         </div>
+        {/* <div className="form__cancel">
+          <div className="form__image-container">
+            <img src={close} onClick={handleClose} className="form__image" />
+          </div>
+        </div> */}
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__container">
             <label htmlFor="content" className="form__label">
@@ -93,12 +100,12 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
               cols="30"
               rows="5"
               className={`form__input  form__input--textarea ${
-                isError && fields.content ? "form__input--error" : ""
+                isError && !fields.content ? "form__input--error" : ""
               }`}
               placeholder="I'm in the mood for..."
               onChange={handleChange}
             ></textarea>
-            {isError && !fields.duration ? (
+            {isError && !fields.content ? (
               <div className="form__error-container">
                 <img src={error} className="form__icon" />
                 <p className="form__error">This field is required</p>
@@ -123,7 +130,10 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
               <option value="2">2 Minutes</option>
               <option value="3">3 Minutes</option>
               <option value="5">5 Minutes</option>
+              <option value="10">10 Minutes</option>
               <option value="120">2 Hours</option>
+              <option value="1440">24 Hours</option>
+              <option value="1500">25 Hours</option>
             </select>
 
             {isError && !fields.duration ? (

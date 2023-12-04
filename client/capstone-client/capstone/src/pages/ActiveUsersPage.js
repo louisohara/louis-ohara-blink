@@ -19,7 +19,6 @@ function ActiveUsersPage({
   const [change, setChange] = useState(false);
 
   useEffect(() => {
-    console.log("hello");
     const getUsers = async () => {
       //GETS FRIENDS OF THE CURRENT USER
       try {
