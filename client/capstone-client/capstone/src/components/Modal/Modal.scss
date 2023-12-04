@@ -61,7 +61,9 @@
       left: 0;
     }
   }
-  &__friends {
+  &__friends,
+  &--post,
+  &--active {
     padding: 0;
     border: 2px solid $logo-colour;
   }

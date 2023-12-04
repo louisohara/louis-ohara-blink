@@ -44,4 +44,21 @@ const viewFriends = async (req, res) => {
   }
 };
 
-module.exports = { getAllFriends, addFriend, viewFriends };
+const deleteFriend = async (req, res) => {
+  const { user_id, friend_id } = req.body;
+  try {
+    const result = await knex("friends")
+      .where({ user_id: user_id, friend_id: friend_id })
+      .del();
+    if (result === 0) {
+      return res
+        .status(404)
+        .json({ message: `User with ID ${user_id} not found` });
+    }
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: `Error deleting user: ${error}` });
+  }
+};
+
+module.exports = { getAllFriends, addFriend, viewFriends, deleteFriend };

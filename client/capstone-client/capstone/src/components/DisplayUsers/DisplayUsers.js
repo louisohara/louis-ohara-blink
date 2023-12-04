@@ -5,7 +5,7 @@ import "./DisplayUsers.scss";
 
 function DisplayUsers({ usersArray }) {
   // const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
-  const limit = 5;
+  const limit = 6;
   const remainder = limit - usersArray.length;
   const articlesArray = new Array(remainder).fill(null);
   return (

@@ -1,4 +1,8 @@
 import "./App.scss";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -9,21 +13,27 @@ import UserPostsPage from "./pages/UserPostsPage.js";
 import UserFriendsPage from "./pages/UserFriendsPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
+import { useCallback } from "react";
+import Particles from "react-particles";
+import { loadSlim } from "tsparticles-slim";
 import UserSignUpPage from "./pages/UserSignUpPage";
 import LoginPage from "./pages/LoginPage";
-
-//GET THE ID OF THE CURRENT USER AND PASS AS PROPS TO:
-//USER PAGE
-//USER FRIENDS PAGE
-//CREATE POST PAGE
-//USERPOSTSPAGE - IN ORDER TO ADD COMMENTS
 
 function App() {
   const [active, setActive] = useState(null);
   const [users, setUsers] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [posted, setPosted] = useState(false);
+
+  const particlesInit = useCallback(async (engine) => {
+    console.log(engine);
+
+    await loadSlim(engine);
+  }, []);
+
+  const particlesLoaded = useCallback(async (container) => {
+    await console.log(container);
+  }, []);
 
   const setPostedTrue = () => {
     setPosted(true);
@@ -32,13 +42,11 @@ function App() {
   const setPostedFalse = () => {
     setPosted(false);
   };
-  //GET THE MOST RECENT USER ADDED - the user profile most recently added should be the current user
   useEffect(() => {
     const getCurrentUser = async () => {
       const response = await axios.get(`http://localhost:8080/api/users/`);
       setUsers(response.data);
       setCurrentUser(response.data[response.data.length - 1]);
-      // setCurrentUser(response.data[2]);
     };
     getCurrentUser();
   }, [posted]);
@@ -53,7 +61,86 @@ function App() {
         <Header currentUser={currentUser} />
         <Footer currentUser={currentUser} active={active} />
         <main className="main">
-          <div className="main__div"></div>
+          <div className="main__div">
+            <Particles
+              id="tsparticles"
+              className="particles"
+              init={particlesInit}
+              loaded={particlesLoaded}
+              options={{
+                fullScreen: false,
+                background: {
+                  color: {
+                    // value: "#34403A;",
+                    value: "#1E2F23",
+                  },
+                },
+                fpsLimit: 120,
+                interactivity: {
+                  events: {
+                    onClick: {
+                      enable: true,
+                      mode: "push",
+                    },
+                    onHover: {
+                      enable: true,
+                      mode: "repulse",
+                    },
+                    resize: true,
+                  },
+                  modes: {
+                    push: {
+                      quantity: 4,
+                    },
+                    repulse: {
+                      distance: 50,
+                      duration: 0.4,
+                    },
+                  },
+                },
+                particles: {
+                  color: {
+                    value: "#ffffff",
+                  },
+                  links: {
+                    color: "#ffffff",
+                    distance: 150,
+                    enable: true,
+                    opacity: 0.5,
+                    width: 1,
+                  },
+                  move: {
+                    direction: "none",
+                    enable: true,
+                    outModes: {
+                      default: "bounce",
+                    },
+                    random: true,
+                    speed: 2,
+                    straight: false,
+                  },
+                  number: {
+                    density: {
+                      enable: true,
+                      area: 800,
+                    },
+                    value: 80,
+                  },
+                  opacity: {
+                    value: 0.5,
+                  },
+                  shape: {
+                    type: "circle",
+                  },
+                  size: {
+                    value: { min: 1, max: 3 },
+                  },
+                },
+                detectRetina: true,
+              }}
+            />
+          </div>
+
           <div className="main__inner">
             <Routes>
               <Route
@@ -99,6 +186,7 @@ function App() {
               />
             </Routes>
           </div>
+          <div className="main__bottom"></div>
         </main>
       </BrowserRouter>
     </div>

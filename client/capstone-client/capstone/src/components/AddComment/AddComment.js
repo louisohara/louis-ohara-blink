@@ -66,6 +66,7 @@ function AddComment({ postID, currentUser, getPostComments }) {
           className="conversation-form__input"
           placeholder="Add a new comment"
           onChange={handleChange}
+          value={comment}
         ></textarea>
         {errors && (
           <p className="conversation-form__error">

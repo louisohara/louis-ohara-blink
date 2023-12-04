@@ -53,7 +53,7 @@ function DisplayPost({
         }
       );
       if (response.status === 200) {
-        setShow(false);
+        handleClose();
       }
     } catch (error) {
       console.error(error);
@@ -79,6 +79,19 @@ function DisplayPost({
     return { date: formattedDate, time: formattedTime };
   }
 
+  function calculateMinutesRemaining(expirationTime) {
+    // Current time
+    const currentTime = new Date();
+
+    // Convert expiration time string to a Date object
+    const expiration = new Date(expirationTime);
+
+    // Calculate time remaining in minutes
+    const timeDiffInMilliseconds = expiration.getTime() - currentTime.getTime();
+    const minutesRemaining = Math.floor(timeDiffInMilliseconds / (1000 * 60));
+
+    return minutesRemaining;
+  }
   if (!userPost) {
     return (
       <>
@@ -102,45 +115,56 @@ function DisplayPost({
   return (
     <section className="user">
       <div className="modal__overlay modal__overlay--post">
-        <div className="modal">
-          <div className="post__cancel">
+        <div className="modal modal--post">
+          {/* <div className="post__cancel">
             <div className="post__image-container">
               <img src={close} onClick={handleClose} className="post__image" />
             </div>
-          </div>
+          </div> */}
+          <div className="post__close">
+            <div className="post__image-container">
+              <img src={close} onClick={handleClose} className="post__image" />
+            </div>
 
-          <article className="post">
-            <div className="post__icon-container">
-              <img
-                src={userPost.avatar_url}
-                alt={`${userPost.first_name}'s icon`}
-                className="post__icon"
-              />
-            </div>
-            <div className="post__int-container">
-              <div className="post__flex-wrapper">
-                <h3 className="post__name">{`${userPost.first_name} ${userPost.surname}`}</h3>
-                <span className="post__timestamp">
-                  {formatISODateTime(userPost.created_at).time}
-                </span>
+            <p className="post__text">
+              {calculateMinutesRemaining(userPost.expirationTime)} minutes
+              remaining
+            </p>
+          </div>
+          <div className="post__outer">
+            <article className="post">
+              <div className="post__icon-container">
+                <img
+                  src={userPost.avatar_url}
+                  alt={`${userPost.first_name}'s icon`}
+                  className="post__icon"
+                />
               </div>
-              <p className="post__post">{userPost.content}</p>
-            </div>
-          </article>
-          <DisplayPostComments
-            postID={userPost.id}
-            currentUser={currentUser}
-            userId={user.id}
-            handleToggle={handleToggle}
-          />
-          {currentUser.id === user.id && (
-            <Button
-              image={error}
-              onClick={handleToggle}
-              text="Deactivate"
-              alt="deactivate"
+              <div className="post__int-container">
+                <div className="post__flex-wrapper">
+                  <h3 className="post__name">{`${userPost.first_name} ${userPost.surname}`}</h3>
+                  <span className="post__timestamp">
+                    {formatISODateTime(userPost.created_at).time}
+                  </span>
+                </div>
+                <p className="post__post">{userPost.content}</p>
+              </div>
+            </article>
+            <DisplayPostComments
+              postID={userPost.id}
+              currentUser={currentUser}
+              userId={user.id}
+              handleToggle={handleToggle}
             />
-          )}
+            {currentUser.id === user.id && (
+              <Button
+                image={error}
+                onClick={handleToggle}
+                text="Deactivate"
+                alt="deactivate"
+              />
+            )}
+          </div>
         </div>
       </div>
     </section>

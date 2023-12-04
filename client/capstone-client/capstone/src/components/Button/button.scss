@@ -21,6 +21,10 @@
 
   &--user {
     max-width: 30%;
+
+    @include mobile-only {
+      max-width: 100%;
+    }
     margin: auto;
     @include tablet {
       position: absolute;
@@ -40,8 +44,9 @@
     &--delete {
       gap: 0;
     }
-    &__comment {
+    &--comment {
       justify-content: center;
+      gap: 0;
     }
     &--friends {
       align-items: center;
