@@ -25,7 +25,6 @@
     @include tablet {
       display: flex;
       justify-content: center;
-      gap: 2rem;
     }
   }
   &__flex::-webkit-scrollbar {

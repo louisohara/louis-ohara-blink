@@ -88,10 +88,7 @@ function ActiveUsersPage({
     };
   }, [active]);
 
-  //
-
   if (!active) {
-    // || !active
     return <p></p>;
   }
   return (
@@ -116,8 +113,7 @@ function ActiveUsersPage({
           <DisplayUsersActive
             activeArray={active}
             currentUser={currentUser}
-            // sortedUsers={sortedUsers}
-            // change={change}
+            setPostedFalse={setPostedFalse}
           />
         </div>
       </div>

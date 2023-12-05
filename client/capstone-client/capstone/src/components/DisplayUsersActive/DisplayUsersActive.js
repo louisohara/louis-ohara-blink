@@ -2,7 +2,7 @@ import "./DisplayUsersActive.scss";
 import { useState } from "react";
 import DisplayPost from "../DisplayPost/DisplayPost";
 
-function DisplayUsersActive({ activeArray, currentUser }) {
+function DisplayUsersActive({ activeArray, currentUser, setPostedFalse }) {
   console.log(activeArray.length);
   const filteredArray = activeArray.filter((user) => user.active === 1);
   const sortedUsers = filteredArray.slice().sort((a, b) => b.active - a.active);
@@ -56,13 +56,12 @@ function DisplayUsersActive({ activeArray, currentUser }) {
       </div>
 
       {show && (
-        // <div className="display-active__modal">
         <DisplayPost
           handleClose={handleClose}
           user={user}
           currentUser={currentUser}
+          setPostedFalse={setPostedFalse}
         />
-        // </div>
       )}
     </section>
   );

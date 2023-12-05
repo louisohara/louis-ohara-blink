@@ -35,7 +35,6 @@ const addUser = async (req, res) => {
       email,
       password,
       avatar_url: "http://localhost:8080/images/profile_image.jpg",
-      //GET HELP WITH STATIC IMAGE LINKING
     };
 
     const [id] = await knex("users").insert(newUser).returning("id");

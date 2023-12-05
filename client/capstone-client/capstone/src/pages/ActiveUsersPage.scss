@@ -4,8 +4,6 @@
 @use "../styles/partials/variables" as *;
 
 .active-users {
-  // height: 85vh;
-  // overflow: scroll;
   @include mobile-container;
   margin: 0 auto;
   @include tablet {
@@ -27,5 +25,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  &__message,
+  &__navlink {
+    text-decoration: none;
+    color: black;
+  }
+  &__message {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__span {
+    font-weight: 600;
+    color: $logo-colour;
+    text-decoration: underline;
+    margin-top: 0.5rem;
+    cursor: pointer;
   }
 }

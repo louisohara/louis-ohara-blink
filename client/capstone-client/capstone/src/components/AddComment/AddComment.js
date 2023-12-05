@@ -2,7 +2,6 @@ import add_comment from "../../assets/Icons/add_comment.svg";
 import Button from "../Button/Button";
 import { useState } from "react";
 import axios from "axios";
-import error from "../../assets/Icons/error-24px.svg";
 import "./AddComment.scss";
 
 function AddComment({ postID, currentUser, getPostComments }) {

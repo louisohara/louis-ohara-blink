@@ -19,6 +19,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @include desktop {
+      margin-bottom: 5rem;
+    }
   }
   &__title {
     margin: -3rem 0 3rem;

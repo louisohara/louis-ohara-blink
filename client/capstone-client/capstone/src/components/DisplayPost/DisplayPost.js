@@ -17,7 +17,7 @@ function DisplayPost({
   user,
   handleShow,
   show,
-  setShow,
+  setPostedFalse,
 }) {
   const [userPost, setUserPost] = useState(null);
 
@@ -53,6 +53,7 @@ function DisplayPost({
         }
       );
       if (response.status === 200) {
+        setPostedFalse();
         handleClose();
       }
     } catch (error) {

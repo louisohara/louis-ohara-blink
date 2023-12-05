@@ -67,7 +67,6 @@ function App() {
                 fullScreen: false,
                 background: {
                   color: {
-                    // value: "#34403A;",
                     value: "#1E2F23",
                   },
                 },
