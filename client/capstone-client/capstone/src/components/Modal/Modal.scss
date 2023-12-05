@@ -4,7 +4,6 @@
 @use "../../styles/partials/variables" as *;
 
 .modal {
-  // width: 65%;
   height: fit-content;
   margin: auto;
   background-color: #ffffff;
@@ -36,7 +35,14 @@
     height: 100%;
     @include tablet {
       position: static;
-      // width: 50%;
+    }
+  }
+  &__overlay--post--alt {
+    @include tablet {
+      width: 60%;
+    }
+    @include desktop {
+      width: 50%;
     }
   }
   &__overlay--friends,
@@ -67,27 +73,7 @@
     padding: 0;
     border: 2px solid $logo-colour;
   }
-  //   &__inner {
-  //     width: 90%;
-  //     margin: auto;
-  //     margin-bottom: 2rem;
-  //   }
-  //   &__title {
-  //     font-size: 3rem;
-  //     font-weight: 300;
-  //     margin: 1.5rem 0;
-  //   }
-  //   &__subtitle {
-  //     color: #7e3fbd;
-  //     font-size: 2rem;
-  //     font-weight: 400;
-  //     margin-top: 0.5rem;
-  //   }
-  //   &__content {
-  //     display: flex;
-  //     gap: 2rem;
-  //   }
-  //   &__cancel-wrapper {
-  //     text-align: right;
-  //   }
+  &--post {
+    margin-top: 0.5rem;
+  }
 }

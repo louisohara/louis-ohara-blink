@@ -4,6 +4,8 @@
 @use "../styles/partials/variables" as *;
 
 .active-users {
+  // height: 85vh;
+  // overflow: scroll;
   @include mobile-container;
   margin: 0 auto;
   @include tablet {

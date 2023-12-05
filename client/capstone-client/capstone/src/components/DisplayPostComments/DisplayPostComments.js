@@ -15,8 +15,6 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
         `http://localhost:8080/api/posts/${postID}/comments`
       );
       setPostComments(response.data);
-      //   console.log(response.data);
-      //   console.log(postComments);
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +30,7 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
     const min = String(date.getMinutes()).padStart(2, "0");
     const amOrPm = hh >= 12 ? "PM" : "AM";
 
-    hh = hh % 12 || 12; // Convert to 12-hour clock
+    hh = hh % 12 || 12;
 
     const formattedDate = `${dd}/${mm}/${yyyy}`;
     const formattedTime = `${hh}:${min} ${amOrPm}`;
@@ -52,7 +50,6 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
       {postComments.map((comment) => {
         const handleDelete = async (id) => {
           try {
-            // console.log(id);
             const response = await axios.delete(
               `http://localhost:8080/api/comments/${id}`
             );
@@ -64,20 +61,7 @@ function DisplayPostComments({ postID, currentUser, userId, handleToggle }) {
             console.error(error);
           }
         };
-        // const handleEdit = async (id) => {
-        //     try {
-        //       // console.log(id);
-        //       const response = await axios.edit(
-        //         `http://localhost:8080/api/comments/${id}`
-        //       );
-        //       if (response.status === 204) {
-        //         console.log("comment deleted");
-        //         getPostComments();
-        //       }
-        //     } catch (error) {
-        //       console.error(error);
-        //     }
-        //   };
+
         return (
           <article className="comment" key={comment.id}>
             <div className="comment__icon-container">

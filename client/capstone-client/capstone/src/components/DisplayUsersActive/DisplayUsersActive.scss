@@ -6,6 +6,13 @@
 .display-active {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  overflow: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  height: 80vh;
   @include desktop {
     width: 70%;
   }
@@ -17,19 +24,17 @@
     flex-wrap: nowrap;
     gap: 2rem;
     background: transparent;
-
-    // background-color: $tertiary-colour;
   }
   &__container {
+    margin-top: 0.5rem;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 2rem;
     justify-content: center;
+    padding-bottom: 8rem;
     @include tablet {
       width: 50%;
-      // left: 50%;
-      // margin: 0 auto;
     }
   }
   &__modal {
@@ -54,6 +59,11 @@
     box-shadow: $shadow;
     object-fit: cover;
     position: relative;
+
+    &--alt {
+      border: 2px solid $alt-logo;
+      box-shadow: 0rem 0rem 0.5rem 0rem $logo-colour;
+    }
   }
   &__name {
     position: absolute;
@@ -63,7 +73,6 @@
     color: $white-2;
     font-weight: $font-demi;
     font-size: $size-sub-header;
-    // bottom: 1rem;
   }
   &__empty {
     height: 200px;

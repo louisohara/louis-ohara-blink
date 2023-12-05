@@ -9,6 +9,7 @@
   gap: 2rem;
   background: transparent;
   justify-content: center;
+  align-items: flex-start;
   @include tablet {
     width: 50%;
   }
@@ -20,6 +21,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
+    padding-bottom: 4rem;
     @include tablet {
       // width: 70%;
       //   margin: 0 auto;
@@ -27,6 +29,9 @@
     @include desktop {
       // width: 60%;
     }
+  }
+  &__link {
+    height: fit-content;
   }
 }
 .profile {

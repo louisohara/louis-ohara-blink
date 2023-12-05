@@ -9,11 +9,11 @@
   margin: 0 2rem;
   flex-wrap: wrap;
   flex-direction: column;
-  // @include mobile-container;
-  // margin: 0 auto;
-  // @include tablet {
-  //   @include tablet-container;
-  // }
+  &--alt {
+    @include mobile-only {
+      position: absolute;
+    }
+  }
   &__flex {
     display: flex;
     flex-direction: column;

@@ -80,13 +80,10 @@ function DisplayPost({
   }
 
   function calculateMinutesRemaining(expirationTime) {
-    // Current time
     const currentTime = new Date();
 
-    // Convert expiration time string to a Date object
     const expiration = new Date(expirationTime);
 
-    // Calculate time remaining in minutes
     const timeDiffInMilliseconds = expiration.getTime() - currentTime.getTime();
     const minutesRemaining = Math.floor(timeDiffInMilliseconds / (1000 * 60));
 
@@ -113,14 +110,9 @@ function DisplayPost({
   }
 
   return (
-    <section className="user">
+    <section className="user user--alt">
       <div className="modal__overlay modal__overlay--post">
         <div className="modal modal--post">
-          {/* <div className="post__cancel">
-            <div className="post__image-container">
-              <img src={close} onClick={handleClose} className="post__image" />
-            </div>
-          </div> */}
           <div className="post__close">
             <div className="post__image-container">
               <img src={close} onClick={handleClose} className="post__image" />

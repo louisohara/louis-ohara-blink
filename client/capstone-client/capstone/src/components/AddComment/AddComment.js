@@ -5,9 +5,6 @@ import axios from "axios";
 import error from "../../assets/Icons/error-24px.svg";
 import "./AddComment.scss";
 
-//ADD COMMENT MUST PASS THE ID OF THE CURRENT USER/COMMENTER TO THE API
-//MUST RECEIVE THE ID AS A PROP.
-
 function AddComment({ postID, currentUser, getPostComments }) {
   const [comment, setComment] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -44,7 +41,7 @@ function AddComment({ postID, currentUser, getPostComments }) {
           setErrors(false);
           console.log("success!");
           getPostComments();
-          setComment(null);
+          setComment("");
         } else {
           console.error("Comment creation failed.");
         }
@@ -56,9 +53,6 @@ function AddComment({ postID, currentUser, getPostComments }) {
   return (
     <form className="conversation-form" onSubmit={handleSubmit}>
       <div className="conversation-form__container">
-        {/* <label htmlFor="comment" className="conversation-form__label">
-          JOIN THE CONVERSATION
-        </label> */}
         <textarea
           type="text"
           name="comment"

@@ -16,7 +16,6 @@ function ActiveUsersPage({
 }) {
   const baseURL = "http://localhost:8080/api/users";
   const [friends, setFriends] = useState(null);
-  const [change, setChange] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {

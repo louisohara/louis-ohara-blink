@@ -4,13 +4,8 @@
 @use "../../styles/partials/variables" as *;
 
 .conversation-form {
-  // &__button-container {
-  //   display: flex;
-  //   justify-content: center;
-  // }
   display: flex;
-  // flex-direction: column;
-  // justify-content: center;
+
   align-items: center;
   &__container {
     margin: 1rem;
@@ -36,6 +31,9 @@
     &:active {
       outline: none;
       border: solid 2px $secondary-colour;
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   &__error {
