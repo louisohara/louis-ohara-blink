@@ -26,25 +26,36 @@ Knex, mysql2, cors, express, dotenv, node.js, jsonwebtoken
 <img width="1279" alt="Screenshot 2023-12-04 at 13 15 59" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/f3256805-41b1-49cc-8a70-942017a06d42">
 
 2) Add friends to get started.
-<img width="247" alt="Screenshot 2023-12-04 at 12 32 38" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/8f8aced0-8b26-48bb-b292-db08fd0c17c7">
+<img width="1270" alt="Screenshot 2023-12-05 at 16 41 22" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/db29348d-171a-45a5-a8c4-45849eb5a66c">
 
-3) Search for friends to connect.
-<img width="251" alt="Screenshot 2023-12-04 at 12 31 44" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/7db7e612-de94-4ee1-837c-37e862ceebe2">
+Navigate to the add friends page.
 
-4) See which friends are available at any moment via the Active Users page.
-<img width="242" alt="Screenshot 2023-12-04 at 12 30 54" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/b020d237-7e6c-45b6-a052-8ef93dbddcb0">
+<img width="579" alt="Screenshot 2023-12-05 at 16 46 52" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/bf1c5479-c23e-405b-a2c8-af744f976a8c">
+
+Press the search button to find friends.
+
+<img width="251" alt="Screenshot 2023-12-05 at 16 44 40" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/79e7d5e3-dcce-4589-aaea-b8c28fb03819">
+
+4) Search for friends to connect.
+
+<img width="260" alt="Screenshot 2023-12-05 at 16 50 19" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/b9d37546-9f88-4f50-a0b1-0aa005964f6f">
+
+5) See which friends are available at any moment via the Active Users page.
+<img width="1266" alt="Screenshot 2023-12-05 at 16 52 50" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/a73cdeca-793e-4968-bd03-69c0f49d2270">
 
 6) Click on an active profile to see the post belonging to that user. You can comment on your friend's post, as well as see how long they are available for.
-<img width="1266" alt="Screenshot 2023-12-04 at 12 44 18" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/48c8a061-5e6a-4d31-898b-e995a05f2ceb">
+<img width="1265" alt="Screenshot 2023-12-05 at 16 54 34" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/729c6b6e-6872-4126-a332-884975bc11a6">
 
 7) If you're free in that moment, navigate to your user profile to activate your profile and make a post.
 <img width="246" alt="Screenshot 2023-12-04 at 12 33 04" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/3a892adb-6a63-4f02-8520-5248507490b6">
 <img width="243" alt="Screenshot 2023-12-04 at 12 34 23" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/1ca41f64-ea79-4c81-96b0-a9d9092a358b">
 
 8) Your profile will be added to the active users page - where your friends will be able to view your post and respond.
-<img width="1262" alt="Screenshot 2023-12-04 at 12 36 56" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/d5b3d2d7-18ab-437c-b553-5df90442fc05">
+<img width="1264" alt="Screenshot 2023-12-05 at 17 00 05" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/2264b260-a911-4744-98ee-b5c46c689877">
+
 You can also view your post on your profile page. You can deactivate at any time - removing your profile and post from the active users view for others to see.
-<img width="243" alt="Screenshot 2023-12-04 at 12 35 07" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/00b240a8-0e66-4b9f-ba50-b96bb51ad47f">
+
+<img width="259" alt="Screenshot 2023-12-05 at 17 03 54" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/febf0ce4-1f3a-43b9-8de3-9effcd757fa2">
 
 10) Your profile will remain on the active users grid for the amount of time specified when you activated/made a post. The purpose of this feature is to ensure that only users who are free at that moment are displayed on the active users grid.
 
