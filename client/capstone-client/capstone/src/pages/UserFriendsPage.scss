@@ -18,15 +18,20 @@
   }
 
   &__flex {
+    height: 65vh;
+    overflow: scroll;
+    overflow-x: hidden;
+
     @include tablet {
       display: flex;
       justify-content: center;
-      // position: relative;
     }
+  }
+  &__flex::-webkit-scrollbar {
+    display: none;
   }
   &__add {
     display: flex;
     justify-content: center;
-    // align-items: center;
   }
 }

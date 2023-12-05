@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import "./DisplayUsers.scss";
 
-//DISPLAYS FRIENDS
-
 function DisplayUsers({ usersArray }) {
-  // const sortedUsers = usersArray.slice().sort((a, b) => b.active - a.active);
   const limit = 6;
   const remainder = limit - usersArray.length;
   const articlesArray = new Array(remainder).fill(null);

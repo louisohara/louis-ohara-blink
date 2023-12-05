@@ -102,7 +102,6 @@ function UserPage({ currentUser, posted, setPostedTrue }) {
           <>
             {!show &&
               (user.active === 0 ? (
-                // <div className="user__flex">
                 <Button
                   image={Upload}
                   onClick={handleShow}
@@ -110,7 +109,6 @@ function UserPage({ currentUser, posted, setPostedTrue }) {
                   alt="user"
                 />
               ) : (
-                // </div>
                 <>
                   <DisplayPost
                     currentUser={user}
@@ -120,7 +118,6 @@ function UserPage({ currentUser, posted, setPostedTrue }) {
                     show={show}
                     setShow={setShow}
                   />
-                  {/* <Button image={error} onClick={handleToggle} text="Deactivate" /> */}
                 </>
               ))}
             {show && (

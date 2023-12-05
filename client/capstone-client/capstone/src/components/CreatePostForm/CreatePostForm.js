@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useEffect } from "react";
+
 import axios from "axios";
-import Button from "../Button/Button";
 import "../Modal/Modal.scss";
 import close from "../../assets/Icons/close-24px.svg";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ import "./CreatePostForm.scss";
 import error from "../../assets/Icons/error-24px.svg";
 import logo from "../../assets/Icons/publish.svg";
 
-//TO DO -
 function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
   const navigate = useNavigate();
   const [fields, setFields] = useState({
@@ -75,8 +73,8 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
   };
 
   return (
-    <div className="modal__overlay modal__overlay--post">
-      <div className="modal modal--post">
+    <div className="modal__overlay modal__overlay--post modal__overlay--post--alt">
+      <div className="modal modal--post modal--post--alt">
         <div className="form__close">
           <div className="form__image-container">
             <img src={close} onClick={handleClose} className="form__image" />
@@ -84,15 +82,11 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
 
           <p className="form__text">Post to your friends</p>
         </div>
-        {/* <div className="form__cancel">
-          <div className="form__image-container">
-            <img src={close} onClick={handleClose} className="form__image" />
-          </div>
-        </div> */}
+
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__container">
             <label htmlFor="content" className="form__label">
-              What do you want to do?{" "}
+              What do you want to do?
             </label>
             <textarea
               name="content"
@@ -119,7 +113,7 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
             <select
               className={`form__input form__input--select${
                 isError && fields.duration ? "form__input--error" : ""
-              }`} // Apply appropriate styling
+              }`}
               name="duration"
               id="duration"
               value={fields.duration}
@@ -145,11 +139,6 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
               ""
             )}
             <div className="form__divider"></div>
-            {/* {posted && (
-              <p className="form__response">
-                Post successful - redirecting to homepage
-              </p>
-            )} */}
 
             <div className="form__button-container">
               <button className="form__button--submit" type="submit">

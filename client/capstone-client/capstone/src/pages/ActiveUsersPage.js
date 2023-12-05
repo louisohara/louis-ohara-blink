@@ -16,7 +16,6 @@ function ActiveUsersPage({
 }) {
   const baseURL = "http://localhost:8080/api/users";
   const [friends, setFriends] = useState(null);
-  const [change, setChange] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -89,10 +88,7 @@ function ActiveUsersPage({
     };
   }, [active]);
 
-  //
-
   if (!active) {
-    // || !active
     return <p></p>;
   }
   return (
@@ -117,8 +113,7 @@ function ActiveUsersPage({
           <DisplayUsersActive
             activeArray={active}
             currentUser={currentUser}
-            // sortedUsers={sortedUsers}
-            // change={change}
+            setPostedFalse={setPostedFalse}
           />
         </div>
       </div>

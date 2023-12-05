@@ -7,4 +7,8 @@
   &__name {
     text-shadow: $shadow-2;
   }
+  &__wrapper--alt {
+    border: 2px solid #1e2f23;
+    box-shadow: 0rem 0rem 0.5rem 0rem #216869;
+  }
 }

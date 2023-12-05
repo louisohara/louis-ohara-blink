@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
-import axios from "axios";
 import "./DisplayUsersActive.scss";
 import { useState } from "react";
 import DisplayPost from "../DisplayPost/DisplayPost";
 
-function DisplayUsersActive({ activeArray, currentUser }) {
+function DisplayUsersActive({ activeArray, currentUser, setPostedFalse }) {
   console.log(activeArray.length);
   const filteredArray = activeArray.filter((user) => user.active === 1);
   const sortedUsers = filteredArray.slice().sort((a, b) => b.active - a.active);
@@ -22,22 +20,28 @@ function DisplayUsersActive({ activeArray, currentUser }) {
   return (
     <section className="display-active display-active--alt">
       <div className="display-active__container">
-        {sortedUsers.slice(0, 6).map((user) => {
-          if (user.active === 1) {
+        {sortedUsers.slice(0, 6).map((User) => {
+          if (User.active === 1) {
             return (
-              <article className="profile-active" key={user.id}>
-                <div className="profile-active__wrapper">
+              <article className="profile-active" key={User.id}>
+                <div
+                  className={
+                    show && user === User
+                      ? `profile-active__wrapper profile-active__wrapper--alt`
+                      : `profile-active__wrapper`
+                  }
+                >
                   <img
-                    src={user.avatar_url}
+                    src={User.avatar_url}
                     alt="User Profile"
                     className="profile-active__image"
                     onClick={() => {
                       handleShow();
-                      setUser(user);
+                      setUser(User);
                     }}
                   />
                 </div>
-                <p className="profile-active__name">{user.first_name}</p>
+                <p className="profile-active__name">{User.first_name}</p>
               </article>
             );
           }
@@ -52,13 +56,12 @@ function DisplayUsersActive({ activeArray, currentUser }) {
       </div>
 
       {show && (
-        // <div className="display-active__modal">
         <DisplayPost
           handleClose={handleClose}
           user={user}
           currentUser={currentUser}
+          setPostedFalse={setPostedFalse}
         />
-        // </div>
       )}
     </section>
   );
