@@ -68,7 +68,7 @@ function UserSignUpPage({ setCurrentUser }) {
         />
         {error && !fields.first_name ? (
           <div className="form__error-container">
-            <img src={wrong} className="form__icon" />
+            <img src={wrong} className="form__icon" alt="error icon" />
             <p className="form__error">This field is required</p>
           </div>
         ) : (
@@ -82,7 +82,7 @@ function UserSignUpPage({ setCurrentUser }) {
         />{" "}
         {error && !fields.surname ? (
           <div className="signup__error-container">
-            <img src={wrong} className="form__icon" />
+            <img src={wrong} className="form__icon" alt="error icon" />
             <p className="signup__error">This field is required</p>
           </div>
         ) : (
@@ -91,7 +91,7 @@ function UserSignUpPage({ setCurrentUser }) {
         <Input type="text" name="email" label="Email" onChange={handleChange} />
         {error && !fields.email ? (
           <div className="signup__error-container">
-            <img src={wrong} className="form__icon" />
+            <img src={wrong} className="form__icon" alt="error icon" />
             <p className="signup__error">This field is required</p>
           </div>
         ) : (
@@ -105,7 +105,7 @@ function UserSignUpPage({ setCurrentUser }) {
         />
         {error && !fields.password ? (
           <div className="signup__error-container">
-            <img src={wrong} className="form__icon" />
+            <img src={wrong} className="form__icon" alt="error icon" />
             <p className="signup__error">This field is required</p>
           </div>
         ) : (

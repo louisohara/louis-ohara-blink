@@ -56,6 +56,10 @@
 
   &__icon {
     width: 5rem;
+    height: 5rem;
+
+    object-fit: cover;
+    object-position: center;
   }
   &__icon-container {
     width: 5rem;

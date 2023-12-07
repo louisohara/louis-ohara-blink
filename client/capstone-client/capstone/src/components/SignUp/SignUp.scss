@@ -14,6 +14,7 @@
 }
 
 .signup {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   width: 22rem;
@@ -64,5 +65,34 @@
   }
   &__image {
     height: 200px;
+    width: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__prompt {
+    font-weight: 600;
+    color: #1f2f23;
+    background-color: #8cc1b175;
+    border: 2px solid #21686a;
+    padding: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+  &__outerbar {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #21686a;
+    position: relative;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+  }
+  &__innerbar {
+    background-color: $logo-colour;
+    height: 1rem;
   }
 }

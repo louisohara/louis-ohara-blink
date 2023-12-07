@@ -11,11 +11,6 @@ import DisplayPost from "../components/DisplayPost/DisplayPost";
 import "../components/Modal/Modal.scss";
 import "./UserPage.scss";
 
-// THIS PAGE NEEDS TO BE THE ID OF THE CURRENT USER
-// SHOULD BE PASSED THE ID OF THE USER FROM APP.JS VIA PROPS
-// LOGIN/AUTH WILL FEED ID INTO THIS PAGE.
-// this page is where the user can view their profile and create a post.
-
 function UserPage({ currentUser, posted, setPostedTrue }) {
   const { id } = useParams();
   const [user, setUser] = useState(null);

@@ -19,8 +19,8 @@ function LoginPage({ currentUser }) {
       });
 
       sessionStorage.setItem("token", response.data.token);
-      console.log(response.data.token);
-      navigate("/");
+
+      navigate("/profile");
     } catch (error) {
       console.error(error);
       setError(error.response.data);

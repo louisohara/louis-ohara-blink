@@ -1,16 +1,45 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography";
+@use "../../styles/partials/resets" as *;
+@use "../../styles/partials/variables" as *;
+
 .field {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &__label {
-        margin-bottom: 0.5rem;
+  &__label {
+    margin-bottom: 0.5rem;
+    &--alt {
+      text-align: center;
     }
+  }
 
-    &__input {
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-        font-size: inherit;
+  &__input {
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: inherit;
+    &--alt {
+      color: rgba(0, 0, 0, 0);
+      cursor: pointer;
+      position: relative;
+      &::-webkit-file-upload-button {
+        visibility: hidden;
+      }
+      &::before {
+        content: "Select photo...";
+        font-weight: 600;
+        color: $logo-colour;
+        text-align: center;
+        cursor: pointer;
+        position: absolute;
+        left: 33%;
+        top: 25%;
+        &:hover {
+          background-color: $logo-colour;
+        }
+      }
     }
+  }
 }
