@@ -25,6 +25,10 @@ Knex, mysql2, cors, express, dotenv, node.js, jsonwebtoken
 1) Sign up as a new user and proceed to login.
 <img width="1279" alt="Screenshot 2023-12-04 at 13 15 59" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/f3256805-41b1-49cc-8a70-942017a06d42">
 
+Add a profile picture after login complete.
+
+<img width="1280" alt="Screenshot 2023-12-07 at 18 32 48" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/d43fa69b-f3b5-43f5-84cf-16b727b0699e">
+
 2) Add friends to get started.
 <img width="1270" alt="Screenshot 2023-12-05 at 16 41 22" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/db29348d-171a-45a5-a8c4-45849eb5a66c">
 
