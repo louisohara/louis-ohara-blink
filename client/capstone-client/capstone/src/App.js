@@ -14,6 +14,7 @@ import Particles from "react-particles";
 import { loadSlim } from "tsparticles-slim";
 import UserSignUpPage from "./pages/UserSignUpPage";
 import LoginPage from "./pages/LoginPage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 function App() {
   const [active, setActive] = useState(null);
@@ -138,6 +139,10 @@ function App() {
 
           <div className="main__inner">
             <Routes>
+              <Route
+                path="/profile"
+                element={<EditProfilePage currentUser={currentUser} />}
+              />
               <Route
                 path="/signup"
                 element={<UserSignUpPage setCurrentUser={setCurrentUser} />}
