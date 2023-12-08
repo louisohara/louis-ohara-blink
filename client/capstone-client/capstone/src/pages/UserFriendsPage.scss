@@ -18,10 +18,10 @@
   }
 
   &__flex {
-    height: 65vh;
+    height: 69vh;
     overflow: scroll;
     overflow-x: hidden;
-
+    padding-bottom: 4rem;
     @include tablet {
       display: flex;
       justify-content: center;
@@ -33,5 +33,13 @@
   &__add {
     display: flex;
     justify-content: center;
+  }
+  &__shadow {
+    &--top {
+      box-shadow: inset 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+    }
+    &--bottom {
+      box-shadow: inset 0 -5px 5px -5px $palette-white;
+    }
   }
 }

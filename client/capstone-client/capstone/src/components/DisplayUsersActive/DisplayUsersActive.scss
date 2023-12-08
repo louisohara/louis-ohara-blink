@@ -12,12 +12,19 @@
   &::-webkit-scrollbar {
     display: none;
   }
-  height: 80vh;
+  height: 75vh;
+
   @include desktop {
     width: 70%;
   }
   @include tablet {
     width: 80%;
+  }
+  &--top {
+    box-shadow: inset 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+  }
+  &--bottom {
+    box-shadow: inset 0 -5px 5px -5px $palette-white;
   }
   &__inner {
     display: flex;

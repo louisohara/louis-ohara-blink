@@ -1,6 +1,7 @@
 import "./DisplayUsersActive.scss";
 import { useState } from "react";
 import DisplayPost from "../DisplayPost/DisplayPost";
+import { useRef, useEffect } from "react";
 
 function DisplayUsersActive({ activeArray, currentUser, setPostedFalse }) {
   console.log(activeArray.length);
@@ -17,8 +18,36 @@ function DisplayUsersActive({ activeArray, currentUser, setPostedFalse }) {
   const remainder = limit - sortedUsers.length;
 
   const articlesArray = new Array(remainder).fill(null);
+  const containerRef = useRef(null);
+  const [showTopShadow, setShowTopShadow] = useState(false);
+  const [showBottomShadow, setShowBottomShadow] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (container) {
+        setShowTopShadow(container.scrollTop > 0);
+        setShowBottomShadow(
+          container.scrollHeight - container.scrollTop > container.clientHeight
+        );
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <section className="display-active display-active--alt">
+    <section
+      className={`display-active display-active--alt display-active--${
+        showTopShadow ? "top" : ""
+      } display-active--${showBottomShadow ? "bottom" : ""}`}
+      ref={containerRef}
+    >
       <div className="display-active__container">
         {sortedUsers.slice(0, 6).map((User) => {
           if (User.active === 1) {

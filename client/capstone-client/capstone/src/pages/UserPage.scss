@@ -66,4 +66,23 @@
       border: 2px solid $secondary-colour;
     }
   }
+  &__button {
+    margin-top: 1rem;
+    background-color: $alt-secondary-colour;
+    border: 2px solid $secondary-colour;
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: $size-sub-header;
+    position: absolute;
+    bottom: -5rem;
+    font-family: $font;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: $secondary-colour;
+    }
+  }
 }

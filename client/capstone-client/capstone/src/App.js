@@ -15,6 +15,9 @@ import { loadSlim } from "tsparticles-slim";
 import UserSignUpPage from "./pages/UserSignUpPage";
 import LoginPage from "./pages/LoginPage";
 import EditProfilePage from "./pages/EditProfilePage";
+import "./components/Modal/Modal.scss";
+import Dashboard from "./pages/Dashboard";
+import Button from "./components/Button/Button";
 
 function App() {
   const [active, setActive] = useState(null);
@@ -32,6 +35,13 @@ function App() {
     await console.log(container);
   }, []);
 
+  const setCurrentChange = (user) => {
+    setCurrentUser(user);
+  };
+
+  const setActiveChange = (prop) => {
+    setActive(prop);
+  };
   const setPostedTrue = () => {
     setPosted(true);
   };
@@ -40,22 +50,39 @@ function App() {
     setPosted(false);
   };
   useEffect(() => {
-    const getCurrentUser = async () => {
+    const getUsers = async () => {
       const response = await axios.get(`http://localhost:8080/api/users/`);
       setUsers(response.data);
-      setCurrentUser(response.data[response.data.length - 1]);
     };
-    getCurrentUser();
+    const getCurrent = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/users/${currentUser.id}`
+        );
+        setCurrentUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUsers();
+    getCurrent();
   }, [posted]);
 
-  if (!currentUser || !users) {
-    return <p>loading...</p>;
-  }
+  // if (!currentUser || !users) {
+  //   return (
+  //     <div className="modal__overlay modal__overlay--active">
+  //       <div className="modal--active modal">
+  //         <p className="modal__loading">Loading...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="app">
       <BrowserRouter>
-        <Header currentUser={currentUser} />
+        <Header />
+
         <Footer currentUser={currentUser} active={active} />
         <main className="main">
           <div className="main__div">
@@ -140,29 +167,20 @@ function App() {
           <div className="main__inner">
             <Routes>
               <Route
-                path="/profile"
-                element={<EditProfilePage currentUser={currentUser} />}
-              />
-              <Route
-                path="/signup"
-                element={<UserSignUpPage setCurrentUser={setCurrentUser} />}
-              />
-              <Route
                 path="/"
                 element={
-                  <ActiveUsersPage
+                  <Dashboard
+                    setCurrentChange={setCurrentChange}
                     currentUser={currentUser}
-                    active={active}
-                    setActive={setActive}
-                    users={users}
                     posted={posted}
-                    setPostedFalse={setPostedFalse}
+                    setPostedTrue={setPostedTrue}
                   />
                 }
               />
+              <Route path="/login" element={<LoginPage />} />
               <Route
-                path="/login"
-                element={<LoginPage currentUser={currentUser} />}
+                path="/signup"
+                element={<UserSignUpPage setCurrentChange={setCurrentChange} />}
               />
               <Route
                 path="/users/:id"
@@ -171,18 +189,33 @@ function App() {
                     currentUser={currentUser}
                     posted={posted}
                     setPostedTrue={setPostedTrue}
+                    setCurrentChange={setCurrentChange}
                   />
                 }
               />
               <Route
-                path="/users/:id/posts"
-                element={<UserPostsPage currentUser={currentUser} />}
+                path="/active"
+                element={
+                  <ActiveUsersPage
+                    currentUser={currentUser}
+                    active={active}
+                    setActiveChange={setActiveChange}
+                    setActive={setActive}
+                    users={users}
+                    posted={posted}
+                    setPostedFalse={setPostedFalse}
+                  />
+                }
               />
               <Route
-                path="/users/friends"
+                path="/friends"
                 element={
                   <UserFriendsPage currentUser={currentUser} users={users} />
                 }
+              />
+              <Route
+                path="/profile"
+                element={<EditProfilePage currentUser={currentUser} />}
               />
             </Routes>
           </div>

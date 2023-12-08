@@ -67,6 +67,14 @@
       left: 0;
     }
   }
+  &__overlay--loading {
+    @include mobile-only {
+      left: 0;
+    }
+    @include tablet {
+      width: calc(100% - $navbar-width);
+    }
+  }
   &__friends,
   &--post,
   &--active {
@@ -75,5 +83,21 @@
   }
   &--post {
     margin-top: 0.5rem;
+  }
+  &__loading {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: $logo-colour;
+    &--alt {
+      padding: 1rem;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
   }
 }

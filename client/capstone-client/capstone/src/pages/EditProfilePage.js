@@ -35,7 +35,7 @@ function EditProfilePage({ currentUser }) {
       );
       if (response.status === 200) {
         console.log("success");
-        navigate(`/users/${currentUser.id}`);
+        navigate(`/login`);
       }
     } catch (error) {
       console.error(error);

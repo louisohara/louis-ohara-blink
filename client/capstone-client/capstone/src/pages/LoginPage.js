@@ -5,7 +5,7 @@ import Input from "../components/Input/Input";
 import { Link } from "react-router-dom";
 import "../components/Login/Login.scss";
 
-function LoginPage({ currentUser }) {
+function LoginPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function LoginPage({ currentUser }) {
 
       sessionStorage.setItem("token", response.data.token);
 
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       console.error(error);
       setError(error.response.data);
