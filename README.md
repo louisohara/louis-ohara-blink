@@ -22,6 +22,10 @@ Knex, mysql2, cors, express, dotenv, node.js, jsonwebtoken
 
 ## **Project Demonstration**
 
+**VIDEO:** 
+https://www.loom.com/share/be035be7c50944c9ae500112055dee57?sid=478694fc-bbc7-4b87-8c09-5260846eb1d9
+
+**STEPS:**
 1) Sign up as a new user and proceed to login.
 <img width="1279" alt="Screenshot 2023-12-04 at 13 15 59" src="https://github.com/louisohara/louis-ohara-blink/assets/145442290/f3256805-41b1-49cc-8a70-942017a06d42">
 
