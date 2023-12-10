@@ -4,6 +4,7 @@ const usersController = require("../controller/usersController");
 const authenticate = require("../middleware/authenticate");
 
 router.get("/", usersController.getAllUsers);
+router.get("/me", authenticate, usersController.getCurrentUser);
 router.get("/:id", usersController.getUser);
 router.post("/", usersController.addUser);
 router.put("/:id", usersController.editUser);

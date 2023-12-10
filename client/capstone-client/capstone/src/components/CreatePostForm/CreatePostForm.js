@@ -60,7 +60,7 @@ function CreatePostForm({ userId, handleClose, posted, setPostedTrue }) {
           handleClose();
           setPostedTrue();
           setTimeout(() => {
-            navigate("/");
+            navigate("/active");
           }, 2000);
           console.log("success!");
         } else {

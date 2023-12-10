@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
 
-const Header = ({ currentUser }) => {
+const Header = () => {
   return (
     <header className="header">
       <nav className="header__navbar">
@@ -13,9 +13,6 @@ const Header = ({ currentUser }) => {
             <img className="header__logo" src={logo} alt="Logo" />
           </Link>
         </div>
-        {/* <h1 className="header__wrapper header__wrapper--alt">
-          Make the most of your time. Make the most of your friends.
-        </h1> */}
       </nav>
     </header>
   );

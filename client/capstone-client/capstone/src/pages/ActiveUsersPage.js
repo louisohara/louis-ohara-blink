@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 function ActiveUsersPage({
   currentUser,
   active,
+  setPostedTrue,
   setActive,
   users,
   posted,
@@ -19,21 +20,20 @@ function ActiveUsersPage({
 
   useEffect(() => {
     const getUsers = async () => {
-      //GETS FRIENDS OF THE CURRENT USER
       try {
         const { data } = await axios.get(
           `${baseURL}/${currentUser.id}/friends`
         );
 
         const currentTime = new Date();
-        // COMPARES CURRENT DATE/TIME TO POST EXPIRATION DATE
+
         const filteredUsers = data.filter((user) => {
           const expirationTime = new Date(user.expirationTime);
           return expirationTime > currentTime;
         });
 
         setFriends(data.length);
-        //ADDITION
+
         if (
           currentUser.active === 1 &&
           new Date(currentUser.expirationTime) > currentTime
@@ -49,12 +49,12 @@ function ActiveUsersPage({
     getUsers();
   }, [posted]);
 
-  //THIS IS THE INTERVAL TIMER
   const updateUser = async (userId) => {
     try {
       await axios.put(`http://localhost:8080/api/users/${userId}`, {
         active: false,
       });
+      setPostedTrue();
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +62,7 @@ function ActiveUsersPage({
   useEffect(() => {
     const expirationCheck = () => {
       const currentTimeUpdated = new Date();
-
+      // if (active) {
       const updatedUsers = active.map((user) => {
         if (
           user.active === 1 &&
@@ -79,6 +79,7 @@ function ActiveUsersPage({
 
       setActive(updatedUsers);
       console.log();
+      // }
     };
 
     const intervalId = setInterval(expirationCheck, 15 * 1000);
@@ -89,7 +90,14 @@ function ActiveUsersPage({
   }, [active]);
 
   if (!active) {
-    return <p></p>;
+    return (
+      <p></p>
+      // <div className="modal__overlay modal__overlay--active">
+      //   <div className="modal--active modal">
+      //     <p className="modal__loading">Loading...</p>
+      //   </div>
+      // </div>
+    );
   }
   return (
     <section className="active-users">
@@ -99,7 +107,7 @@ function ActiveUsersPage({
           {friends === 0 && (
             <div className="modal__overlay modal__overlay--active">
               <div className="modal--active modal">
-                <NavLink to="/users/friends" className="active-users__navlink">
+                <NavLink to="/friends" className="active-users__navlink">
                   <p className="active-users__message">
                     You have no friends?
                     <span className="active-users__span">

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import wrong from "../assets/Icons/error-24px.svg";
 
-function UserSignUpPage({ setCurrentUser }) {
+function UserSignUpPage({ setCurrentChange }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -46,8 +46,8 @@ function UserSignUpPage({ setCurrentUser }) {
           fields
         );
         if (response.status === 201) {
-          setCurrentUser(response.data);
-          navigate("/login");
+          setCurrentChange(response.data);
+          navigate("/profile");
         }
       } catch (error) {
         console.error(error);

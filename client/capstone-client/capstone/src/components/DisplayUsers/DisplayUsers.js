@@ -5,6 +5,7 @@ function DisplayUsers({ usersArray }) {
   const limit = 6;
   const remainder = limit - usersArray.length;
   const articlesArray = new Array(remainder).fill(null);
+
   return (
     <section className="display">
       <div className="display__inner">

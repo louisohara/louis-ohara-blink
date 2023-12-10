@@ -1,16 +1,17 @@
 import DisplayUsers from "../components/DisplayUsers/DisplayUsers";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+
 import AddFriends from "../components/AddFriends/AddFriends";
 import "./UserFriendsPage.scss";
 
-//MUST RECEIVE THE ID OF THE SELECTED USER AS A PROP IN ORDER TO VIEW THEIR FRIENDS
 function UserFriendsPage({ currentUser, users }) {
-  // const { id } = useParams();
   const [userFriends, setUserFriends] = useState(null);
-  console.log(users);
+  const containerRef = useRef(null);
+  const [showTopShadow, setShowTopShadow] = useState(false);
+  const [showBottomShadow, setShowBottomShadow] = useState(false);
+
   const baseURL = `http://localhost:8080/api/users/${currentUser.id}/friends`;
   const getUserFriends = async () => {
     try {
@@ -25,8 +26,35 @@ function UserFriendsPage({ currentUser, users }) {
     getUserFriends();
   }, [currentUser.id]);
 
+  useEffect(() => {
+    if (!userFriends) return;
+    const container = containerRef.current;
+
+    const handleScroll = () => {
+      if (container) {
+        setShowTopShadow(container.scrollTop > 0);
+        setShowBottomShadow(
+          container.scrollHeight - container.scrollTop > container.clientHeight
+        );
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, [userFriends]);
+
   if (!userFriends) {
-    return <p></p>;
+    return (
+      <div className="modal__overlay modal__overlay--active">
+        <div className="modal--active modal">
+          <p className="modal__loading">Loading...</p>
+        </div>
+      </div>
+    );
   }
   return (
     <section className="friends">
@@ -34,7 +62,12 @@ function UserFriendsPage({ currentUser, users }) {
         <h1 className="friends__title">
           You have {userFriends.length} friends
         </h1>
-        <div className="friends__flex">
+        <div
+          className={`friends__flex friends__shadow--${
+            showTopShadow ? "top" : ""
+          } friends__shadow--${showBottomShadow ? "bottom" : ""}`}
+          ref={containerRef}
+        >
           <DisplayUsers usersArray={userFriends} />
           <div className="friends__add">
             <AddFriends

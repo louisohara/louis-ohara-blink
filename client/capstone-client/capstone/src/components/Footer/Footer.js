@@ -11,7 +11,10 @@ const Footer = ({ currentUser, active }) => {
       <nav className="footer__navbar">
         <div className="footer__wrapper">
           <div className="footer__container">
-            <NavLink to={`/`} className="footer__link">
+            <NavLink
+              to={currentUser ? "/active" : "/"}
+              className="footer__link"
+            >
               <div className="footer__image-container">
                 <img
                   src={network}
@@ -25,7 +28,10 @@ const Footer = ({ currentUser, active }) => {
                 )}
               </div>
             </NavLink>
-            <NavLink to={`/users/${currentUser.id}`} className="footer__link">
+            <NavLink
+              to={currentUser ? `/users/${currentUser.id}` : "/"}
+              className="footer__link"
+            >
               <div className="footer__image-container">
                 <img
                   src={add}
@@ -34,7 +40,10 @@ const Footer = ({ currentUser, active }) => {
                 />
               </div>
             </NavLink>
-            <NavLink to="/users/friends" className="footer__link">
+            <NavLink
+              to={currentUser ? "/friends" : "/"}
+              className="footer__link"
+            >
               <div className="footer__image-container">
                 <img
                   src={friends}

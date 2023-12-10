@@ -35,6 +35,7 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
   });
   useEffect(() => {
     if (searchTerm) {
+      setIsAdded(false);
       const results = fuse.search(searchTerm);
       console.log(results);
       const filteredResults = results.filter((result) => result.item); // Extract matched items
@@ -65,6 +66,7 @@ function AddFriends({ users, userFriends, currentUser, getUserFriends }) {
 
   const handleOnSelect = (selectedItem) => {
     setFriendUser(selectedItem);
+    setIsAdded(false);
   };
   const handleClear = () => {
     setFriendUser(null);

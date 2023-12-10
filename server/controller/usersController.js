@@ -26,6 +26,20 @@ const getUser = async (req, res) => {
   }
 };
 
+const getCurrentUser = async (req, res) => {
+  try {
+    const profile = await knex("users").where({ id: req.user_id }).first();
+    if (!profile) {
+      return res
+        .status(404)
+        .json({ message: `User with ID ${req.user_id} not found` });
+    }
+    res.status(200).json(profile);
+  } catch (error) {
+    res.status(500).json({ message: `Error retrieving user: ${error}` });
+  }
+};
+
 const addUser = async (req, res) => {
   const { first_name, surname, email, password } = req.body;
   try {
@@ -139,6 +153,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   getUser,
+  getCurrentUser,
   addUser,
   editUser,
   getUserPosts,
