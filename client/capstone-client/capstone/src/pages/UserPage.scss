@@ -84,5 +84,8 @@
     &:hover {
       background-color: $secondary-colour;
     }
+    &--alt {
+      bottom: -2rem;
+    }
   }
 }

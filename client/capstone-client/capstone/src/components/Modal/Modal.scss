@@ -55,6 +55,7 @@
     }
   }
   &__overlay--active {
+    z-index: 1;
     @include tablet {
       position: fixed;
       top: 0;

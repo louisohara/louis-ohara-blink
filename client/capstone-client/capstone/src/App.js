@@ -190,6 +190,7 @@ function App() {
                     posted={posted}
                     setPostedTrue={setPostedTrue}
                     setCurrentChange={setCurrentChange}
+                    setPostedFalse={setPostedFalse}
                   />
                 }
               />
@@ -204,6 +205,7 @@ function App() {
                     users={users}
                     posted={posted}
                     setPostedFalse={setPostedFalse}
+                    setPostedTrue={setPostedTrue}
                   />
                 }
               />

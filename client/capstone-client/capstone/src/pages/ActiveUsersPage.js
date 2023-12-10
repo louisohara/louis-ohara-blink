@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 function ActiveUsersPage({
   currentUser,
   active,
-
+  setPostedTrue,
   setActive,
   users,
   posted,
@@ -54,6 +54,7 @@ function ActiveUsersPage({
       await axios.put(`http://localhost:8080/api/users/${userId}`, {
         active: false,
       });
+      setPostedTrue();
     } catch (error) {
       console.error(error);
     }

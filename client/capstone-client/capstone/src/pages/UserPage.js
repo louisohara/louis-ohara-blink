@@ -13,7 +13,13 @@ import DisplayPost from "../components/DisplayPost/DisplayPost";
 import "../components/Modal/Modal.scss";
 import "./UserPage.scss";
 
-function UserPage({ currentUser, posted, setPostedTrue, setCurrentChange }) {
+function UserPage({
+  currentUser,
+  posted,
+  setPostedTrue,
+  setCurrentChange,
+  setPostedFalse,
+}) {
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [show, setShow] = useState(false);
@@ -31,6 +37,7 @@ function UserPage({ currentUser, posted, setPostedTrue, setCurrentChange }) {
       await axios.put(`http://localhost:8080/api/users/${id}`, {
         active: false,
       });
+      setPostedFalse();
     } catch (error) {
       console.error(error);
     }
@@ -41,6 +48,7 @@ function UserPage({ currentUser, posted, setPostedTrue, setCurrentChange }) {
       const response = await axios.get(`http://localhost:8080/api/users/${id}`);
       console.log(response.data);
       setUser(response.data);
+      setCurrentChange(response.data);
     };
     getUser();
   }, [id, handleToggle]);
@@ -64,7 +72,7 @@ function UserPage({ currentUser, posted, setPostedTrue, setCurrentChange }) {
     return { date: formattedDate, time: formattedTime };
   }
 
-  if (!user) {
+  if (!user || !currentUser) {
     return (
       <div className="modal__overlay modal__overlay--active">
         <div className="modal--active modal">
@@ -97,7 +105,12 @@ function UserPage({ currentUser, posted, setPostedTrue, setCurrentChange }) {
             </div>
           )}
           {!show && currentUser.id === user.id ? (
-            <button onClick={logout} className="user__button">
+            <button
+              onClick={logout}
+              className={`user__button ${
+                !show && user.active === 1 ? "user__button--alt" : ""
+              }`}
+            >
               Log out
             </button>
           ) : (
